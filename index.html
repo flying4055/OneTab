@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneTab</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app" class="app" data-cloak>
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <img id="logo" src="./logo.png" alt="logo"></img>
+            </div>
+            <ul id="tabBar" class="sidebar-center tab-list"></ul>
+            <button id="settingsBtn" class="sidebar-bottom sidebar-setting" type="button" aria-label="设置">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M12 8.5a3.5 3.5 0 1 1 0 7a3.5 3.5 0 0 1 0-7zm8.94 2.1l-1.54-.26a7.8 7.8 0 0 0-.74-1.79l.9-1.28a.75.75 0 0 0-.08-.95l-1.5-1.5a.75.75 0 0 0-.95-.08l-1.28.9a7.8 7.8 0 0 0-1.79-.74l-.26-1.54A.75.75 0 0 0 12.9 2h-1.8a.75.75 0 0 0-.74.62l-.26 1.54a7.8 7.8 0 0 0-1.79.74l-1.28-.9a.75.75 0 0 0-.95.08l-1.5 1.5a.75.75 0 0 0-.08.95l.9 1.28a7.8 7.8 0 0 0-.74 1.79l-1.54.26A.75.75 0 0 0 2 11.1v1.8c0 .37.27.69.64.74l1.54.26c.18.63.44 1.22.74 1.79l-.9 1.28a.75.75 0 0 0 .08.95l1.5 1.5c.24.24.62.28.95.08l1.28-.9c.57.3 1.16.56 1.79.74l.26 1.54c.05.37.37.64.74.64h1.8c.37 0 .69-.27.74-.64l.26-1.54c.63-.18 1.22-.44 1.79-.74l1.28.9c.33.2.71.16.95-.08l1.5-1.5a.75.75 0 0 0 .08-.95l-.9-1.28c.3-.57.56-1.16.74-1.79l1.54-.26c.37-.05.64-.37.64-.74v-1.8a.75.75 0 0 0-.64-.74z"
+                        fill="currentColor" />
+                </svg>
+            </button>
+        </aside>
+
+        <main class="content">
+            <section id="timeWidget" class="time-widget">
+                <div id="timeClock" class="time-clock">00:00</div>
+                <div id="timeWidgetDate" class="time-date">--</div>
+            </section>
+            <section class="search glass">
+                <div class="search-row">
+                    <div class="search-box">
+                        <input id="searchInput" type="text" placeholder="搜索或输入网址" class="search-input"
+                            autocomplete="off">
+                        <span class="search-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M11 4a7 7 0 1 1 0 14a7 7 0 0 1 0-14zm0-2a9 9 0 1 0 5.66 15.98l4.18 4.18a1 1 0 0 0 1.42-1.42l-4.18-4.18A9 9 0 0 0 11 2z"
+                                    fill="currentColor" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="search-actions">
+                        <div id="engineSelect" class="custom-select">
+                            <button id="engineSelectBtn" class="custom-select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                                <span id="engineSelectLabel" class="custom-select-label">Google</span>
+                                <svg class="custom-select-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M7 10l5 5 5-5z" fill="currentColor" />
+                                </svg>
+                            </button>
+                            <div id="engineSelectDropdown" class="custom-select-dropdown is-hidden" role="listbox"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="searchResults" class="search-results is-hidden" aria-live="polite"></div>
+            </section>
+
+            <section class="sites">
+                <div id="siteGrid" class="site-grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="contextMenu" class="context-menu">
+        <button type="button" class="context-item" data-action="add" data-context="empty">添加书签</button>
+        <button type="button" class="context-item" data-action="edit" data-context="site">编辑书签</button>
+        <button type="button" class="context-item context-danger" data-action="delete" data-context="site">删除书签</button>
+        <button type="button" class="context-item" data-action="copy" data-context="search">复制</button>
+        <button type="button" class="context-item" data-action="paste" data-context="search">粘贴纯文本</button>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title">添加书签</h3>
+                <button id="modalClose" class="icon-btn" type="button" aria-label="关闭">×</button>
+            </div>
+            <div id="modalForm" class="modal-body">
+                <label class="field">
+                    <span>名称</span>
+                    <input id="bookmarkName" type="text" placeholder="例如：知乎">
+                </label>
+                <label class="field">
+                    <span>链接</span>
+                    <input id="bookmarkUrl" type="url" placeholder="https://www.zhihu.com">
+                </label>
+            </div>
+            <div id="modalConfirm" class="modal-body is-hidden">
+                <p id="modalMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCancel" type="button" class="btn btn-ghost">取消</button>
+                <button id="modalSubmit" type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settingsOverlay" class="modal-overlay">
+        <div class="modal settings-modal settings-shell">
+            <div class="settings-layout">
+                <aside class="settings-nav">
+                    <div class="settings-nav-title">设置</div>
+                    <button class="settings-nav-item" type="button" data-section="profile">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="8" r="4" fill="currentColor" />
+                                <path d="M4 20c1.5-3.5 5-5 8-5s6.5 1.5 8 5" fill="currentColor" />
+                            </svg>
+                        </span>
+                        个人中心
+                    </button>
+                    <button class="settings-nav-item" type="button" data-section="searchBox">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M11 4a7 7 0 1 1 0 14a7 7 0 0 1 0-14zm0-2a9 9 0 1 0 5.66 15.98l4.18 4.18a1 1 0 0 0 1.42-1.42l-4.18-4.18A9 9 0 0 0 11 2z"
+                                    fill="currentColor" />
+                            </svg>
+                        </span>
+                        搜索框
+                    </button>
+                    <button class="settings-nav-item" type="button" data-section="searchEngine">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 2l9 5-9 5-9-5 9-5zm0 7l9 5-9 5-9-5 9-5z" fill="currentColor" />
+                            </svg>
+                        </span>
+                        搜索引擎
+                    </button>
+                    <button class="settings-nav-item is-active" type="button" data-section="icon">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor" />
+                                <rect x="7" y="7" width="10" height="10" rx="3" fill="#0b1020" />
+                            </svg>
+                        </span>
+                        图标设置
+                    </button>
+                    <button class="settings-nav-item" type="button" data-section="time">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none" />
+                                <path d="M12 7v6l4 2" stroke="currentColor" stroke-width="2" fill="none" />
+                            </svg>
+                        </span>
+                        时间设置
+                    </button>
+                    <button class="settings-nav-item" type="button" data-section="wallpaper">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="14" rx="3" stroke="currentColor" stroke-width="2"
+                                    fill="none" />
+                                <path d="M7 14l3-3 3 3 4-4" stroke="currentColor" stroke-width="2" fill="none" />
+                            </svg>
+                        </span>
+                        壁纸设置
+                    </button>
+                    <button class="settings-nav-item" type="button" data-section="other">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M12 8.5a3.5 3.5 0 1 1 0 7a3.5 3.5 0 0 1 0-7zm8.94 2.1l-1.54-.26a7.8 7.8 0 0 0-.74-1.79l.9-1.28a.75.75 0 0 0-.08-.95l-1.5-1.5a.75.75 0 0 0-.95-.08l-1.28.9a7.8 7.8 0 0 0-1.79-.74l-.26-1.54A.75.75 0 0 0 12.9 2h-1.8a.75.75 0 0 0-.74.62l-.26 1.54a7.8 7.8 0 0 0-1.79.74l-1.28-.9a.75.75 0 0 0-.95.08l-1.5 1.5a.75.75 0 0 0-.08.95l.9 1.28a7.8 7.8 0 0 0-.74 1.79l-1.54.26A.75.75 0 0 0 2 11.1v1.8c0 .37.27.69.64.74l1.54.26c.18.63.44 1.22.74 1.79l-.9 1.28a.75.75 0 0 0 .08.95l1.5 1.5c.24.24.62.28.95.08l1.28-.9c.57.3 1.16.56 1.79.74l.26 1.54c.05.37.37.64.74.64h1.8c.37 0 .69-.27.74-.64l.26-1.54c.63-.18 1.22-.44 1.79-.74l1.28.9c.33.2.71.16.95-.08l1.5-1.5a.75.75 0 0 0 .08-.95l-.9-1.28c.3-.57.56-1.16.74-1.79l1.54-.26c.37-.05.64-.37.64-.74v-1.8a.75.75 0 0 0-.64-.74z"
+                                    fill="currentColor" />
+                            </svg>
+                        </span>
+                        其它设置
+                    </button>
+                    <button class="settings-nav-item" type="button" data-section="data">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="4" y="4" width="7" height="7" rx="2" fill="currentColor" />
+                                <rect x="13" y="4" width="7" height="7" rx="2" fill="currentColor" />
+                                <rect x="4" y="13" width="7" height="7" rx="2" fill="currentColor" />
+                                <rect x="13" y="13" width="7" height="7" rx="2" fill="currentColor" />
+                            </svg>
+                        </span>
+                        数据管理
+                    </button>
+                    <button class="settings-nav-item" type="button" data-section="about">
+                        <span class="settings-nav-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none" />
+                                <path d="M12 10v7M12 7h.01" stroke="currentColor" stroke-width="2" fill="none" />
+                            </svg>
+                        </span>
+                        关于 OneTab
+                    </button>
+                </aside>
+                <section class="settings-panel">
+                    <div class="settings-panel-header">
+                        <div>
+                            <div class="settings-panel-title">图标设置</div>
+                            <div class="settings-panel-sub">统一调整图标样式与间距</div>
+                        </div>
+                        <button id="settingsClose" class="icon-btn settings-close" type="button"
+                            aria-label="关闭">×</button>
+                    </div>
+
+                    <div class="settings-panel-body">
+                        <div class="settings-panel-section is-active" data-panel="icon">
+                            <div class="settings-card">
+                                <div class="settings-card-head">
+                                    <img class="settings-app-logo" src="./logo.png" alt="logo">
+                                    <div class="settings-card-text">
+                                        <div class="settings-card-title">更好的圆角</div>
+                                        <div class="settings-card-desc">为圆角启用自然过渡，让卡片更柔和。</div>
+                                    </div>
+                                    <label class="switch">
+                                        <input id="roundingToggle" type="checkbox" checked>
+                                        <span class="switch-track"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <div class="settings-card-title">图标圆角</div>
+                                <div class="settings-slider-row">
+                                    <input id="iconRadius" class="slider" type="range" min="0" max="32" value="24">
+                                    <span id="iconRadiusValue" class="slider-value">24</span>
+                                </div>
+                                <div class="settings-card-title">图标大小</div>
+                                <div class="settings-slider-row">
+                                    <input id="iconSize" class="slider" type="range" min="36" max="120" value="80">
+                                    <span id="iconSizeValue" class="slider-value">80</span>
+                                </div>
+                                <div class="settings-card-title">不透明度</div>
+                                <div class="settings-slider-row">
+                                    <input id="iconOpacity" class="slider" type="range" min="20" max="100" value="100">
+                                    <span id="iconOpacityValue" class="slider-value">100</span>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <div class="settings-card-head">
+                                    <div class="settings-card-title">图标间距</div>
+                                    <label class="switch">
+                                        <input id="spacingLink" type="checkbox" checked>
+                                        <span class="switch-track"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-slider-row">
+                                    <span class="slider-label">横向</span>
+                                    <input id="gapX" class="slider" type="range" min="6" max="36" value="10">
+                                    <span id="gapXValue" class="slider-value">10</span>
+                                </div>
+                                <div class="settings-slider-row">
+                                    <span class="slider-label">纵向</span>
+                                    <input id="gapY" class="slider" type="range" min="6" max="36" value="10">
+                                    <span id="gapYValue" class="slider-value">10</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-panel-section" data-panel="searchEngine">
+                            <div class="settings-card">
+                                <div class="settings-card-title">搜索引擎管理</div>
+                                <div id="engineList" class="engine-list"></div>
+                                <div class="engine-form">
+                                    <input id="engineName" type="text" placeholder="引擎名称，例如：Google">
+                                    <input id="engineUrl" type="url"
+                                        placeholder="搜索地址模板，例如：https://www.google.com/search?q={query}">
+                                    <button id="engineAdd" type="button" class="btn btn-primary">添加</button>
+                                </div>
+                                <div class="settings-hint">模板支持 `{query}`，如未填写将自动拼接到 URL 末尾。</div>
+                            </div>
+                        </div>
+
+                        <div class="settings-panel-section" data-panel="time">
+                            <div class="settings-card">
+                                <div class="settings-card-title">时间显示</div>
+                                <div class="settings-toggle-row">
+                                    <span>显示时间</span>
+                                    <label class="switch">
+                                        <input id="timeEnabled" type="checkbox" checked>
+                                        <span class="switch-track"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-toggle-row">
+                                    <span>24 小时制</span>
+                                    <label class="switch">
+                                        <input id="time24h" type="checkbox" checked>
+                                        <span class="switch-track"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-toggle-row">
+                                    <span>显示秒</span>
+                                    <label class="switch">
+                                        <input id="timeSeconds" type="checkbox">
+                                        <span class="switch-track"></span>
+                                    </label>
+                                </div>
+                                <div class="settings-toggle-row">
+                                    <span>显示日期</span>
+                                    <label class="switch">
+                                        <input id="timeDate" type="checkbox" checked>
+                                        <span class="switch-track"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-panel-section" data-panel="wallpaper">
+                            <div class="settings-card">
+                                <div class="settings-card-title">壁纸设置</div>
+                                <div class="settings-actions">
+                                    <button id="wallpaperUpload" type="button" class="btn btn-ghost">选择图片</button>
+                                    <button id="wallpaperClear" type="button" class="btn btn-ghost">恢复默认</button>
+                                </div>
+                                <div class="settings-hint">支持 JPG/PNG/WebP，大小 ≤ 5MB，最大边 ≤ 4096px。</div>
+                                <div id="wallpaperPreview" class="wallpaper-preview"></div>
+                                <input id="wallpaperInput" class="is-hidden" type="file" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="settings-panel-section" data-panel="data">
+                            <div class="settings-card">
+                                <div class="settings-card-title">书签数据管理</div>
+                                <div class="settings-actions">
+                                    <button id="dataImport" type="button" class="btn btn-ghost">导入书签</button>
+                                    <button id="dataExport" type="button" class="btn btn-ghost">导出书签</button>
+                                </div>
+                                <div class="settings-hint">支持导入 `nav.json` 格式，会覆盖当前书签数据。</div>
+                                <input id="dataFile" class="is-hidden" type="file" accept="application/json">
+                            </div>
+                        </div>
+
+                        <div class="settings-panel-section" data-panel="placeholder">
+                            <div class="settings-card">
+                                <div class="settings-card-title">即将上线</div>
+                                <div class="settings-card-desc">该模块正在规划中。</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-panel-footer"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>

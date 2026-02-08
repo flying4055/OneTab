@@ -1,0 +1,1236 @@
+﻿{
+  "version": 1,
+  "categories": [
+    {
+      "id": "1",
+      "label": "主页",
+      "icon": "home",
+      "items": [
+        {
+          "url": "https://www.bilibili.com/",
+          "type": "icon",
+          "name": "哔哩哔哩",
+          "src": "https://files.codelife.cc/icons/bilibili2.svg",
+          "backgroundColor": "#ff5ca1",
+          "id": "Iv-vofhdzRU-MzL9oKDzg0745",
+          "view": 208
+        },
+        {
+          "url": "https://flowus.cn",
+          "type": "icon",
+          "name": "FlowUs",
+          "src": "https://files.codelife.cc/icons/flowus.svg",
+          "id": "-o_tStwuqJwlZhV7HgM9M6371",
+          "view": 148,
+          "iconText": "Flo",
+          "backgroundColor": "#fff"
+        },
+        {
+          "id": "GAe-BZPjIYmEp_PNzMElD7016",
+          "url": "https://kaifa.baidu.com/",
+          "name": "开发者搜索",
+          "src": "https://files.codelife.cc/icons/7914406dbe290eee.png",
+          "type": "icon",
+          "iconText": "开发者",
+          "backgroundColor": "#ffffff",
+          "view": 7
+        },
+        {
+          "id": "IEvWMSmqVawJWrD_vcDw73322",
+          "url": "https://www.qianwen.com/",
+          "name": "通义千问",
+          "src": "https://img.alicdn.com/imgextra/i4/O1CN01EfJVFQ1uZPd7W4W6i_!!6000000006051-2-tps-112-112.png",
+          "type": "icon",
+          "iconText": "通义千",
+          "backgroundColor": "#fffff",
+          "view": 161
+        },
+        {
+          "id": "ouQMWhlcgCqYL6sGhWZPO3084",
+          "url": "https://www.wolai.com/",
+          "name": "我来",
+          "src": "https://files.codelife.cc/icons/www.wolai.com.svg",
+          "type": "icon",
+          "iconText": "我来",
+          "backgroundColor": "#FFFFFF",
+          "view": 1
+        },
+        {
+          "url": "https://www.deepl.com/zh/translator",
+          "type": "icon",
+          "name": "DeepL翻译",
+          "src": "https://files.codelife.cc/icons/deepl.svg",
+          "backgroundColor": "#ffffff",
+          "id": "Sb_-UbbzgfmCzOc9mpho05455",
+          "view": 21,
+          "iconText": "Dee"
+        },
+        {
+          "url": "https://www.infoq.cn/",
+          "type": "icon",
+          "name": "InfoQ ",
+          "src": "https://files.codelife.cc/icons/infoq.svg",
+          "backgroundColor": "#ffffff",
+          "id": "ZuDS7fcX623fYPbQUf6Su6594",
+          "view": 37
+        },
+        {
+          "id": "Pd5SKLHDUyy7v0VUWycBa",
+          "url": "http://music.163.com/",
+          "type": "icon",
+          "name": "网易云音乐",
+          "src": "https://files.codelife.cc/website/music163.svg",
+          "view": 8
+        },
+        {
+          "id": "Ry0KpW4PwCpFNuhrjZdna",
+          "url": "http://ditu.amap.com/",
+          "type": "icon",
+          "name": "高德地图",
+          "src": "https://files.codelife.cc/website/595a178e703e23483da8775f.png",
+          "view": 7
+        },
+        {
+          "id": "RVRGuBQiixye7Bv2MlMGU",
+          "url": "http://v.qq.com/",
+          "type": "icon",
+          "name": "腾讯视频",
+          "src": "https://files.codelife.cc/website/qqvideo.svg",
+          "view": 2
+        },
+        {
+          "id": "60b9ea7aae5a9ba4024b3744",
+          "url": "https://www.aliyun.com/",
+          "type": "icon",
+          "name": "阿里云",
+          "src": "https://files.codelife.cc/website/595a178e703e23483da8784d.png",
+          "view": 15
+        },
+        {
+          "id": "60b9eac9ae5a9ba4024b392a",
+          "url": "https://www.aliyundrive.com/",
+          "type": "icon",
+          "name": "阿里云盘",
+          "src": "https://files.codelife.cc/website/aliyundrive.svg",
+          "view": 1
+        },
+        {
+          "type": "icon",
+          "id": "wyuo1P7YdygxDJFnoBM2S",
+          "url": "https://cloud.tencent.com/",
+          "name": "腾讯云",
+          "src": "https://files.codelife.cc/website/5aebfdf4fb674834c299ff9a.png",
+          "iconText": "腾讯云",
+          "backgroundColor": "#FFFFFF",
+          "view": 87
+        },
+        {
+          "url": "http://docs.qq.com",
+          "type": "icon",
+          "name": "腾讯文档",
+          "src": "https://files.codelife.cc/icons/docs-qq.svg",
+          "backgroundColor": "#fff",
+          "id": "0KHfr8rryd2W1Zk0Xa0ZD3434",
+          "view": 23
+        },
+        {
+          "url": "https://www.douyin.com",
+          "type": "icon",
+          "name": "抖音",
+          "src": "https://files.codelife.cc/website/douyin.svg",
+          "id": "QJU9bqEdi-qcEVtUfTUuf9389",
+          "view": 28
+        },
+        {
+          "categorys": ["design"],
+          "name": "渐变色",
+          "component": "webGradients",
+          "type": "icon",
+          "insetType": "iframe",
+          "src": "https://files.codelife.cc/tools-icon/webGradients.svg",
+          "createTime": "2022-07-17T03:52:57.093Z",
+          "updateTime": "2022-07-17T04:13:54.326Z",
+          "size": "1x1",
+          "id": "pHzvW6jK2u3MEmQvzN3MZ4624",
+          "view": 4
+        },
+        {
+          "url": "https://cls88i1wk5.feishu.cn/drive/home/",
+          "type": "icon",
+          "name": "飞书文档",
+          "src": "https://files.codelife.cc/icons/feishu.svg",
+          "backgroundColor": "#fff",
+          "id": "WOqvRXmI4S_nC-yxTpxqP6902"
+        },
+        {
+          "url": "https://xiezuocat.com/?s=itab",
+          "type": "icon",
+          "name": "秘塔写作猫",
+          "src": "https://files.codelife.cc/icons/xiezuocat.com.svg",
+          "backgroundColor": "#fefefe",
+          "id": "dFL9pJBwCJcObxfiG3GPS6684",
+          "view": 1
+        },
+        {
+          "url": "https://mail.126.com/",
+          "type": "icon",
+          "name": "网易126邮箱",
+          "src": "https://files.codelife.cc/icons/126.svg",
+          "backgroundColor": "#fcfcf9",
+          "id": "dvTLrFs01VolY4cwGEWfw8781",
+          "view": 14
+        },
+        {
+          "url": "https://email.163.com",
+          "type": "icon",
+          "name": "网易邮箱",
+          "src": "https://files.codelife.cc/icons/eb58486c2f648735.png",
+          "backgroundColor": "#fd1e1e",
+          "id": "8bEEWxMTu3B-Xt-fj3pIp1967",
+          "view": 7
+        },
+        {
+          "url": "https://www.thepaper.cn/",
+          "type": "icon",
+          "name": "澎湃新闻",
+          "src": "https://files.codelife.cc/icons/www.thepaper.cn.svg",
+          "backgroundColor": "#fff",
+          "id": "5JAcSTd4a5SLd7gpJDDZz4753",
+          "view": 4
+        },
+        {
+          "url": "https://www.google.com/",
+          "type": "icon",
+          "name": "Google",
+          "src": "https://files.codelife.cc/icons/google.svg",
+          "backgroundColor": "#fff",
+          "id": "Eaxo7wErkOQGkq26JC7gS5722",
+          "view": 14
+        },
+        {
+          "url": "https://mail.qq.com/",
+          "type": "icon",
+          "name": "QQ邮箱",
+          "src": "https://files.codelife.cc/icons/qq-mail.svg",
+          "backgroundColor": "#fff",
+          "id": "oKuVRN5P40f811DT2KelO6189"
+        },
+        {
+          "url": "https://lanhuapp.com",
+          "type": "icon",
+          "name": "蓝湖",
+          "src": "https://files.codelife.cc/icons/lanhuapp.svg",
+          "backgroundColor": "#fff",
+          "id": "M1aBQSRTCGysmxZdIm9Wy1366",
+          "view": 61
+        },
+        {
+          "id": "dnUCMZrazDRXxBbjdVZuN0339",
+          "url": "https://cn.wordpress.org/",
+          "name": "WordPress",
+          "src": "https://s.w.org/images/wmark.png",
+          "type": "icon",
+          "iconText": "博客工",
+          "backgroundColor": "#FFFFFF",
+          "view": 12
+        },
+        {
+          "id": "yRCQdc2K4ufBPQLJcn75h1935",
+          "url": "https://www.wpzhiku.com/",
+          "name": "WP智库",
+          "src": "https://c.wpzhiku.com/uploads/2019/09/icon.ico",
+          "type": "icon",
+          "iconText": "Wor",
+          "backgroundColor": "transparent",
+          "view": 18
+        },
+        {
+          "id": "caDvjmxPDFOPuZUKGl4Fv4802",
+          "url": "https://bbs.colg.cn/",
+          "name": "COLG社区",
+          "src": "https://files.codelife.cc/icons/60b9ef17ae5a9ba4024b471e.png",
+          "type": "icon",
+          "iconText": "COL",
+          "backgroundColor": "#3acdf7",
+          "view": 85
+        },
+        {
+          "url": "http://www.itmop.com/",
+          "type": "icon",
+          "name": "绿色软件下载",
+          "src": "https://files.codelife.cc/icons/www.itmop.com.svg",
+          "backgroundColor": "#fff",
+          "id": "ue8kW1wZ7aSGAZ7Ol31ab2704",
+          "view": 4
+        },
+        {
+          "id": "8owKcfwVD_PpSYwAkK0Ho6485",
+          "url": "http://www.dj1234.com/",
+          "name": "先上DJ",
+          "src": "",
+          "type": "text",
+          "iconText": "先上D",
+          "backgroundColor": "#054092",
+          "view": 1
+        },
+        {
+          "id": "GHtWiJ-S7put3xQnxymgL6876",
+          "url": "https://dash.cloudflare.com/",
+          "name": "Cloudflare",
+          "src": "https://files.codelife.cc/website/604ad9938af9860fb41a9dde.png",
+          "type": "icon",
+          "iconText": "Clo",
+          "view": 37
+        },
+        {
+          "id": "8cJ2D8x7TMycSiQkM3J7P0684",
+          "url": "https://ai-bot.cn/",
+          "name": "AI工具集",
+          "src": "https://files.codelife.cc/icons/ai-bot.svg",
+          "type": "icon",
+          "iconText": "AI工",
+          "backgroundColor": "#fff",
+          "view": 4
+        },
+        {
+          "id": "KOxsK2M75AIKUxS6QdXbc4064",
+          "url": "https://chatglm.cn/",
+          "name": "智谱清言",
+          "src": "https://files.codelife.cc/icons/chatglm.cn.png",
+          "type": "icon",
+          "iconText": "智谱清",
+          "backgroundColor": "#ffffff",
+          "view": 11
+        },
+        {
+          "id": "2j2KDwHCjfBw-YccbJD1K4068",
+          "url": "https://www.coze.cn/",
+          "name": "扣子",
+          "src": "https://files.codelife.cc/icons/coze-cn.svg",
+          "type": "icon",
+          "iconText": "扣子",
+          "backgroundColor": "transparent",
+          "view": 1
+        },
+        {
+          "id": "yazBxTig0ekWWWbBv5csX9923",
+          "url": "https://obsidian.md/",
+          "name": "Obsidian",
+          "src": "https://obsidian.md/favicon.svg",
+          "type": "icon",
+          "iconText": "Obs",
+          "backgroundColor": "#023373"
+        },
+        {
+          "id": "UbUL9PJU8pLLIc-fXOHGi8356",
+          "url": "https://v.vcinema.cn/",
+          "name": "电影频道",
+          "src": "https://s.image.vcinema.com.cn/common/img/pumpkin.ico",
+          "type": "icon",
+          "iconText": "电影频",
+          "backgroundColor": "#f9620e",
+          "view": 1
+        },
+        {
+          "id": "0q2ClG9j37665ZqGo0EUF3718",
+          "url": "https://yanetflix.com/",
+          "name": "奈飞工厂",
+          "src": "https://yanetflix.com/upload/site/20241029-1/a3066e37a45ef286668060443b4de885.png",
+          "type": "icon",
+          "iconText": "奈飞工",
+          "backgroundColor": "#c82c34",
+          "view": 3
+        },
+        {
+          "id": "JV-Z2CNqkR2X92A2w5hDf6457",
+          "url": "https://www.cl-mic.com/",
+          "name": "茶杯狐",
+          "src": "",
+          "type": "text",
+          "iconText": "茶杯狐",
+          "backgroundColor": "#1681ff",
+          "view": 4
+        },
+        {
+          "url": "https://www.figma.com/",
+          "type": "icon",
+          "name": "Figma",
+          "src": "https://files.codelife.cc/icons/figma.svg",
+          "backgroundColor": "#161616",
+          "id": "gLW_QF1Aoh9fhwDFv6cJf4743",
+          "view": 1
+        },
+        {
+          "id": "O_TIu-s7QHmkl--uiOs2Q8701",
+          "url": "https://www.gugu3.com/",
+          "name": "咕咕番",
+          "src": "",
+          "type": "text",
+          "iconText": "咕咕番",
+          "backgroundColor": "#276ce6",
+          "view": 2
+        },
+        {
+          "id": "nZx1YFq-_LL-NMaGpnh249806",
+          "url": "https://www.kanxik.com/",
+          "name": "看戏网",
+          "src": "",
+          "type": "text",
+          "iconText": "看戏网",
+          "backgroundColor": "#1681ff",
+          "view": 2
+        },
+        {
+          "id": "u5RyOtHrFEJt4Gy6imtLO3516",
+          "url": "https://chatgpt.com/",
+          "name": "ChatGPT",
+          "src": "",
+          "type": "text",
+          "iconText": "",
+          "backgroundColor": "#1681ff",
+          "view": 2
+        },
+        {
+          "url": "https://tophub.today/",
+          "type": "icon",
+          "name": "今日热榜",
+          "src": "https://files.codelife.cc/icons/tophubtopday.svg",
+          "backgroundColor": "#fff",
+          "id": "29f06Mpwa11aOBNJjMPp67195",
+          "view": 12
+        },
+        {
+          "id": "EyNx9FDi-krwEDnPAxOQL7543",
+          "url": "https://locallytools.com/zh-Hans",
+          "name": "LocallyTools",
+          "src": "https://locallytools.com/favicon.ico",
+          "type": "icon",
+          "iconText": "Loc",
+          "backgroundColor": "#f01313",
+          "view": 1
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "label": "技术",
+      "icon": "home",
+      "items": [
+        {
+          "name": "开源中国",
+          "url": "http://www.oschina.net/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "码云Gitee",
+          "url": "https://gitee.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "掘金",
+          "url": "https://gitee.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "CSDN",
+          "url": "https://www.csdn.net",
+          "backgroundColor": "#cc001b"
+        },
+        {
+          "name": "SegmentFault",
+          "url": "https://segmentfault.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Laravel",
+          "url": "https://learnku.com/laravel/docs",
+          "backgroundColor": "#1890ff"
+        },
+        {
+          "name": "PHP函数",
+          "url": "https://www.p2hp.com/phpfuncs.html",
+          "backgroundColor": "#276ce6"
+        },
+        {
+          "name": "Layui",
+          "url": "https://layui.dev/",
+          "backgroundColor": "#15B9A9"
+        },
+        {
+          "name": "FastAdmin",
+          "url": "https://doc.fastadmin.net/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "ThinkPHP框架",
+          "url": "https://www.thinkphp.cn/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "TPDOC",
+          "url": "https://www.thinkphp.cn/doc",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Workerman",
+          "url": "https://www.workerman.net/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "菜鸟教程",
+          "url": "https://www.runoob.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Bootstrap中文网",
+          "url": "http://www.bootcss.com/",
+          "backgroundColor": "#8913fc"
+        },
+        {
+          "name": "Element-UI",
+          "url": "https://element.eleme.cn/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Element Plus",
+          "url": "https://element-plus.org/zh-CN/#/zh-CN",
+          "backgroundColor": "#fff"
+        },
+        {
+          "name": "Vue",
+          "url": "https://cn.vuejs.org/",
+          "backgroundColor": "#a3ddb9"
+        },
+        {
+          "name": "NuxtJS",
+          "url": "https://nuxt.com/",
+          "backgroundColor": "#0e4740"
+        },
+        {
+          "name": "vite中文",
+          "url": "https://cn.vitejs.dev/",
+          "backgroundColor": "#1890ff"
+        },
+        {
+          "name": "Tailwind3",
+          "url": "https://www.tailwindcss.cn/",
+          "backgroundColor": "#0071c0"
+        },
+        {
+          "name": "Tailwind4",
+          "url": "https://tailwindcss.com/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "MDN",
+          "url": "https://developer.mozilla.org/zh-CN/docs/Learn",
+          "backgroundColor": "#000000"
+        },
+        {
+          "name": "GitHub",
+          "url": "https://github.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "微信测试号",
+          "url": "https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login",
+          "backgroundColor": "#fff"
+        },
+        {
+          "name": "微信公众平台",
+          "url": "https://mp.weixin.qq.com/",
+          "backgroundColor": "#e67e22"
+        },
+        {
+          "name": "微信开放平台",
+          "url": "https://open.weixin.qq.com/cgi-bin/index?t=home/index\u0026lang=zh_CN\u0026token=4c9d8cf4e8158a36a4cbf43e496e50d68d1466b1",
+          "backgroundColor": "#ffffff"
+        },
+        {
+          "name": "微信支付商户",
+          "url": "https://pay.weixin.qq.com",
+          "backgroundColor": "#efa0cb"
+        },
+        {
+          "name": "支付宝",
+          "url": "https://www.alipay.com",
+          "backgroundColor": ""
+        },
+        {
+          "name": "慕课网",
+          "url": "http://www.imooc.com",
+          "backgroundColor": "#ff0000"
+        },
+        {
+          "name": "Ant Design Vue",
+          "url": "https://www.antdv.com/docs/vue/introduce-cn/",
+          "backgroundColor": "#fff"
+        },
+        {
+          "name": "iView",
+          "url": "https://www.iviewui.com/docs/guide/install",
+          "backgroundColor": "#ffffff"
+        },
+        {
+          "name": "书栈网",
+          "url": "https://www.bookstack.cn/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "网道",
+          "url": "https://wangdoc.com/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "iconfont",
+          "url": "https://www.iconfont.cn",
+          "backgroundColor": "#13ae67"
+        },
+        {
+          "name": "微信开放社区",
+          "url": "https://developers.weixin.qq.com/community/develop/mixflow",
+          "backgroundColor": "#ffffff"
+        },
+        {
+          "name": "Animate.css",
+          "url": "https://daneden.github.io/animate.css/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "图标库",
+          "url": "http://fontawesome.dashgame.com/",
+          "backgroundColor": "#21b384"
+        },
+        {
+          "name": "Node.js 中文网",
+          "url": "http://nodejs.cn/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "jsDelivr",
+          "url": "https://www.jsdelivr.com/",
+          "backgroundColor": "#ffffff"
+        },
+        {
+          "name": "七牛云存储",
+          "url": "https://s.qiniu.com/naaI7f",
+          "backgroundColor": "#17ade0"
+        },
+        {
+          "name": "Lodash.js",
+          "url": "https://www.lodashjs.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Git",
+          "url": "https://git-scm.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "力扣",
+          "url": "https://leetcode-cn.com/",
+          "backgroundColor": "#1890ff"
+        },
+        {
+          "name": "黑客与极客",
+          "url": "http://www.freebuf.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "EasyWeChat",
+          "url": "https://easywechat.com/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "QuickRef",
+          "url": "https://quickref.me/",
+          "backgroundColor": "#1F252A"
+        },
+        {
+          "name": "PHP教程",
+          "url": "https://www.p2hp.com/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "现代JavaScript教程",
+          "url": "https://zh.javascript.info/",
+          "backgroundColor": "#be1622"
+        },
+        {
+          "name": "那些免费的砖",
+          "url": "https://www.thosefree.com/",
+          "backgroundColor": "#ee3b3b"
+        },
+        {
+          "name": "caniuse",
+          "url": "https://caniuse.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "宝塔面板",
+          "url": "https://www.bt.cn/Download/btsoftlinux.html",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Linux",
+          "url": "https://www.linuxprobe.com/",
+          "backgroundColor": "#0071c0"
+        },
+        {
+          "name": "Linux",
+          "url": "http://linux.vbird.org/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "linux命令在线中文手册",
+          "url": "http://linux.51yip.com",
+          "backgroundColor": ""
+        },
+        {
+          "name": "gsap",
+          "url": "https://gsap.com/",
+          "backgroundColor": "#a3ddb9"
+        },
+        {
+          "name": "packagist",
+          "url": "https://packagist.org/",
+          "backgroundColor": "#FFFFFF"
+        },
+        {
+          "name": "阿里云开源镜像站",
+          "url": "https://opsx.alibaba.com/mirror",
+          "backgroundColor": "#ff6500"
+        },
+        {
+          "name": "bestofjs",
+          "url": "https://bestofjs.org/",
+          "backgroundColor": "#EE6D01"
+        },
+        {
+          "name": "JQuery",
+          "url": "https://oscarotero.com/jquery/",
+          "backgroundColor": "#054092"
+        },
+        {
+          "name": "Laravel",
+          "url": "https://laravel.com/",
+          "backgroundColor": "#fc4548"
+        },
+        {
+          "name": "Laravel学院",
+          "url": "https://laravelacademy.org/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Laravel-admin",
+          "url": "https://www.laravel-admin.org/",
+          "backgroundColor": "#F3FBF6"
+        },
+        {
+          "name": "uniapp",
+          "url": "https://uniapp.dcloud.io/",
+          "backgroundColor": "#419f4e"
+        },
+        {
+          "name": "Iconify Design",
+          "url": "https://iconify.design/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "ag-Grid Getting ",
+          "url": "https://www.ag-grid.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "npm",
+          "url": "https://www.npmjs.com/",
+          "backgroundColor": "#fb3b49"
+        },
+        {
+          "name": "express",
+          "url": "https://www.expressrc.cn/",
+          "backgroundColor": "#7dac68"
+        },
+        {
+          "name": "Alpine.js",
+          "url": "https://www.alpinejs.cn/",
+          "backgroundColor": "#276ce6"
+        },
+        {
+          "name": "VitePress",
+          "url": "https://vitepress.dev/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "slick.js",
+          "url": "https://kenwheeler.github.io/slick/",
+          "backgroundColor": "#054092"
+        },
+        {
+          "name": "Go文档",
+          "url": "https://www.topgoer.com/",
+          "backgroundColor": "#33c5c5"
+        },
+        {
+          "name": "HTMX",
+          "url": "https://htmx.org/",
+          "backgroundColor": "#023373"
+        },
+        {
+          "name": "websocket",
+          "url": "http://wstool.js.org/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Pay-支付",
+          "url": "https://pay.yansongda.cn/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "laravel文档",
+          "url": "http://laravel.p2hp.com/cndocs/8.x/blade",
+          "backgroundColor": "#e74c3c"
+        },
+        {
+          "name": "Vuetify",
+          "url": "https://vuetifyjs.com/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Vant",
+          "url": "https://vant-contrib.gitee.io/vant",
+          "backgroundColor": "#ffffff"
+        },
+        {
+          "name": "Avue",
+          "url": "https://avuejs.com/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Nuxt中文文档",
+          "url": "https://nuxt.com.cn/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Icônes",
+          "url": "https://icones.js.org/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "Vue DevUI",
+          "url": "https://open.gitcode.host/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Arco Design",
+          "url": "https://arco.design/",
+          "backgroundColor": "#fdfef7"
+        },
+        {
+          "name": "Guide",
+          "url": "https://unocss.dev/",
+          "backgroundColor": "#FFFFFF"
+        },
+        {
+          "name": "免费API",
+          "url": "https://api.aa1.cn/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Next.js",
+          "url": "https://www.nextjs.cn",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "Vercel",
+          "url": "https://vercel.com",
+          "backgroundColor": "#000000"
+        },
+        {
+          "name": "改图宝",
+          "url": "https://www.gaitubao.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "电鸭社区",
+          "url": "https://eleduck.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Topcoder",
+          "url": "https://www.topcoder.com/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "Open VSX",
+          "url": "https://open-vsx.org/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "Bootstrap v5",
+          "url": "https://v5.bootcss.com/",
+          "backgroundColor": "#7609F4"
+        },
+        {
+          "name": "Cursor",
+          "url": "https://www.cursor.com/",
+          "backgroundColor": "#372128"
+        },
+        {
+          "name": "TRAE",
+          "url": "https://www.trae.cn/",
+          "backgroundColor": "#0071c0"
+        },
+        {
+          "name": "jquery手册",
+          "url": "https://www.runoob.com/manual/jquery/",
+          "backgroundColor": "#90c751"
+        },
+        {
+          "name": "Cloudflare",
+          "url": "https://www.cloudflare.com/",
+          "backgroundColor": "#ffffff"
+        },
+        {
+          "name": "Staticfile CDN",
+          "url": "https://www.staticfile.net/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "BootCDN",
+          "url": "https://www.bootcdn.cn/",
+          "backgroundColor": "#27ae60"
+        },
+        {
+          "name": "cdnjs",
+          "url": "https://cdnjs.com/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": " layui文档",
+          "url": "https://www.layui1.com/",
+          "backgroundColor": "#0071c0"
+        },
+        {
+          "name": "UmiJS中文",
+          "url": "https://umijs.org/",
+          "backgroundColor": ""
+        },
+        {
+          "name": "CuteCloud - 最萌の云",
+          "url": "https://main.cute-cloud.de/console",
+          "backgroundColor": "#fbbe23"
+        },
+        {
+          "name": "BuildAdmin",
+          "url": "https://www.buildadmin.com",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "wpdaxue",
+          "url": "https://www.wpdaxue.com/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "Roots",
+          "url": "https://roots.io/",
+          "backgroundColor": "transparent"
+        },
+        {
+          "name": "图片去背景色",
+          "url": "https://tools.kalvinbg.cn/image/bgRemover",
+          "backgroundColor": "#372128"
+        },
+        {
+          "name": "Splide",
+          "url": "https://splidejs.com",
+          "backgroundColor": "#000000"
+        },
+        {
+          "name": "Gin",
+          "url": "https://gin-gonic.com/zh-cn/",
+          "backgroundColor": "#1681ff"
+        },
+        {
+          "name": "Astro",
+          "url": "https://astro.build/",
+          "backgroundColor": "#000000"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "label": "工具",
+      "icon": "home",
+      "items": [
+        {
+          "id": "60b9eaa6ae5a9ba4024b3866",
+          "url": "https://chrome.zzzmh.cn/index#index",
+          "type": "icon",
+          "name": "极简插件",
+          "src": "https://files.codelife.cc/website/5ed9a6a67e261c1f0b4e6c51.png",
+          "view": 33
+        },
+        {
+          "url": "https://wallhaven.cc/",
+          "type": "icon",
+          "name": "Wallhaven",
+          "src": "https://files.codelife.cc/icons/wallhave.svg",
+          "backgroundColor": "#000000",
+          "id": "KB1Uk_dt1cBp1mQOSiVf38392",
+          "view": 23,
+          "iconText": ""
+        },
+        {
+          "type": "icon",
+          "id": "35vDEKH4qpPFX1565yGCG6102",
+          "url": "https://www.ghxi.com/",
+          "name": "果核剥壳",
+          "src": "https://files.codelife.cc/website/ghxi.svg",
+          "iconText": "果核剥",
+          "backgroundColor": "#f1c40f",
+          "view": 102
+        },
+        {
+          "id": "60b9ea70ae5a9ba4024b36fd",
+          "url": "http://www.52pojie.cn/",
+          "type": "icon",
+          "name": "吾爱破解论坛",
+          "src": "https://files.codelife.cc/website/52pojie.svg",
+          "view": 8
+        },
+        {
+          "type": "text",
+          "id": "qKmbO6UEL5jPDPz8zl1Wt",
+          "url": "https://www.kelongwo.com",
+          "name": "克隆窝",
+          "src": "",
+          "iconText": "克隆窝",
+          "backgroundColor": "#2ecc71",
+          "view": 3
+        },
+        {
+          "id": "yt2m7HF0s",
+          "url": "https://toer2.com",
+          "type": "icon",
+          "name": "兔二工具",
+          "src": "https://files.codelife.cc/website/5def63073c4366058063c999.png",
+          "iconText": "兔二工",
+          "backgroundColor": "#ae5493",
+          "view": 4
+        },
+        {
+          "id": "QZhyegp9sttokGJqAI2bV",
+          "url": "http://www.ifanr.com",
+          "type": "icon",
+          "name": "爱范儿",
+          "src": "https://files.codelife.cc/website/595a178e703e23483da871cc.png",
+          "view": 1
+        },
+        {
+          "url": "http://docs.qq.com",
+          "type": "icon",
+          "name": "腾讯文档",
+          "src": "https://files.codelife.cc/website/docs-qq.svg",
+          "id": "uw8PsFWjyffQAsmAH4uqp6825",
+          "view": null
+        },
+        {
+          "type": "icon",
+          "id": "GknOkvUAU3MrArsgSjxUo",
+          "url": "https://www.leangoo.com/",
+          "name": "Leangoo领歌",
+          "src": "https://www.leangoo.com/wp-content/uploads/2013/04/leangoo_favicon.ico",
+          "iconText": "Lea",
+          "backgroundColor": "#FFFDFD"
+        },
+        {
+          "id": "oKdU9QTxkjyPqn1tciySB4365",
+          "url": "https://www.filehorse.com/",
+          "name": "FileHorse",
+          "src": "https://static.filehorse.com/img/favicon-192.png",
+          "type": "text",
+          "iconText": "Fil",
+          "backgroundColor": "transparent",
+          "view": 4
+        },
+        {
+          "url": "https://guozhivip.com/",
+          "type": "icon",
+          "name": "果汁导航",
+          "src": "https://files.codelife.cc/icons/60b9eb37ae5a9ba4024b3aa2.png",
+          "backgroundColor": "#ffffff",
+          "id": "5oJkI69FwXbUZY2wJFfh36982",
+          "view": 2
+        },
+        {
+          "url": "https://www.crx4.com/",
+          "type": "icon",
+          "name": "Chrome插件",
+          "src": "https://files.codelife.cc/icons/www.crx4.com.svg",
+          "backgroundColor": "#fff",
+          "id": "ky1wrsY2mqbgHp8IgDTaV0634",
+          "view": 1
+        },
+        {
+          "url": "http://lackk.com/nav/",
+          "type": "icon",
+          "name": "兰客导航",
+          "src": "https://files.codelife.cc/icons/5ee03eb67e261c1f0b4e6ca7.png",
+          "backgroundColor": "",
+          "id": "p79jB6Q8-kYOwMl958IBP2092",
+          "view": 3
+        },
+        {
+          "url": "https://www.crxsoso.com/?utm=itab",
+          "type": "icon",
+          "name": "扩展搜搜",
+          "src": "https://files.codelife.cc/icons/crxsoso.com.svg",
+          "backgroundColor": "#fff",
+          "id": "NrnD_uOGvJLkUGVYSfgjZ7637",
+          "view": 2
+        },
+        {
+          "url": "https://microsoftedge.microsoft.com/addons/category/EdgeExtensionsEditorsPick?hl=zh-CN",
+          "type": "icon",
+          "name": "Edge扩展",
+          "src": "https://files.codelife.cc/icons/microsoftedge.microsoft.com.svg",
+          "backgroundColor": "#fff",
+          "id": "qIBNk7YRBLUFIu59qkvzW9056",
+          "view": 2
+        },
+        {
+          "url": "https://www.crx4.com/",
+          "type": "icon",
+          "name": "Chrome插件",
+          "src": "https://files.codelife.cc/icons/www.crx4.com.svg",
+          "backgroundColor": "#fff",
+          "id": "LhAboDNgeoPmK7SlnBkvM2883",
+          "view": 4
+        },
+        {
+          "url": "https://extfans.com/",
+          "type": "icon",
+          "name": "扩展迷",
+          "src": "https://files.codelife.cc/icons/5b486983f6de76440bff3164.png",
+          "backgroundColor": "",
+          "id": "i-MEFQQ_KY0-wD1yK6n0x6893",
+          "view": 1
+        },
+        {
+          "url": "https://extfans.com",
+          "type": "icon",
+          "name": "插件网",
+          "src": "https://files.codelife.cc/icons/5a0528c38629f638faaf415f.png",
+          "backgroundColor": "",
+          "id": "8buqeXS5OTEJAwTJkk0k_0224",
+          "view": 3
+        },
+        {
+          "url": "https://extfans.com/",
+          "type": "icon",
+          "name": "扩展与插件商店",
+          "src": "https://files.codelife.cc/icons/5b7bc4bf412fb0635a4fe23c.png",
+          "backgroundColor": "",
+          "id": "37amezWWRqZWom84ZhDCu6007",
+          "view": 2
+        },
+        {
+          "url": "https://www.chromefk.com",
+          "type": "icon",
+          "name": "ChromeFK",
+          "src": "https://files.codelife.cc/icons/7b065c4e166ad8f3.png",
+          "backgroundColor": "#ffffff",
+          "id": "XwQv6XOQ6amJ7HqFPikSa3526",
+          "view": 2
+        },
+        {
+          "id": "Z-Uyqmp670VMyKp2rTDiZ9714",
+          "url": "https://zh.annas-archive.org/",
+          "name": "安娜的档案",
+          "src": "https://zh.annas-archive.org/apple-touch-icon.png?hash=d2fa3410fb1ae23ef0ab",
+          "type": "text",
+          "iconText": "安娜的",
+          "backgroundColor": "#13ae67",
+          "view": 6
+        },
+        {
+          "url": "http://www.dushemovie.com/",
+          "type": "icon",
+          "name": "毒舌电影",
+          "src": "https://files.codelife.cc/icons/5ad60c0c300ccb05a7486c9e.png",
+          "backgroundColor": "",
+          "id": "XZHqkr6aPe4II1TNFIDVA4975",
+          "view": 2
+        },
+        {
+          "url": "http://www.zhuixinfan.com/",
+          "type": "icon",
+          "name": "追新番",
+          "src": "https://files.codelife.cc/icons/60b9ebe1ae5a9ba4024b3ccb.png",
+          "backgroundColor": "#205199",
+          "id": "MSWED-n3WWEAuMuXU4C6H3032",
+          "view": 4
+        },
+        {
+          "url": "http://www.yinfans.me/",
+          "type": "icon",
+          "name": "音范丝",
+          "src": "https://files.codelife.cc/icons/www.yinfans.me.svg",
+          "backgroundColor": "#101010",
+          "id": "N4f_JbI4VpV5jEoyYQmBy4411",
+          "view": 3
+        },
+        {
+          "id": "R_zkd8R17GhBMzbltYjWx6032",
+          "url": "http://ilxdh.com/",
+          "name": "龙轩导航",
+          "src": "https://files.codelife.cc/icons/60b9eb29ae5a9ba4024b3a73.png",
+          "type": "icon",
+          "iconText": "龙轩导",
+          "backgroundColor": "#ffffff",
+          "view": 3
+        },
+        {
+          "url": "https://mail.126.com/",
+          "type": "icon",
+          "name": "网易126邮箱",
+          "src": "https://files.codelife.cc/icons/126.svg",
+          "backgroundColor": "#fcfcf9",
+          "id": "6KIc912YeCvC-V3uV4ITt0723",
+          "view": 1
+        },
+        {
+          "id": "SFULKYc2Q-EkDIPmKSpkQ5287",
+          "url": "https://w1.v2ai.top/",
+          "name": "免费V2ray节点",
+          "src": "https://w1.v2ai.top/favicon.ico",
+          "type": "icon",
+          "iconText": "SS节",
+          "backgroundColor": "transparent",
+          "view": 3
+        },
+        {
+          "id": "4zrTA2s7BUBoEbuM9Lrse2394",
+          "url": "https://yes1.xn--mesv7f5toqlp.com/",
+          "name": "白嫖机场",
+          "src": "",
+          "type": "text",
+          "iconText": "白嫖机场",
+          "backgroundColor": "#1681ff",
+          "view": 1
+        },
+        {
+          "type": "text",
+          "id": "ReQrn5gXOymo8eW2sA4xx",
+          "url": "https://www.pojies.cn/",
+          "name": "八戒影院",
+          "src": "https://www.pojies.cn/wp-content/uploads/2019/11/Go-图标.png",
+          "iconText": "八戒影院",
+          "backgroundColor": "transparent",
+          "view": 32
+        }
+      ]
+    }
+  ]
+}
