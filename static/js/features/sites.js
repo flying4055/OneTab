@@ -29,10 +29,15 @@ export function renderSites() {
         a.draggable = true;
 
         a.addEventListener('contextmenu', (e) => {
-            if (!e.target.closest('.site-icon')) return;
             e.preventDefault();
             e.stopPropagation();
-            openContextMenu(e.clientX, e.clientY, {
+            
+            // 获取元素中心位置而不是鼠标位置
+            const rect = a.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            openContextMenu(x, y, {
                 type: 'site',
                 categoryIndex: state.activeIndex,
                 itemIndex: idx

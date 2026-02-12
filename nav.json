@@ -1,4 +1,4 @@
-﻿{
+{
   "version": 1,
   "categories": [
     {
@@ -16,26 +16,6 @@
           "view": 208
         },
         {
-          "url": "https://flowus.cn",
-          "type": "icon",
-          "name": "FlowUs",
-          "src": "https://files.codelife.cc/icons/flowus.svg",
-          "id": "-o_tStwuqJwlZhV7HgM9M6371",
-          "view": 148,
-          "iconText": "Flo",
-          "backgroundColor": "#fff"
-        },
-        {
-          "id": "GAe-BZPjIYmEp_PNzMElD7016",
-          "url": "https://kaifa.baidu.com/",
-          "name": "开发者搜索",
-          "src": "https://files.codelife.cc/icons/7914406dbe290eee.png",
-          "type": "icon",
-          "iconText": "开发者",
-          "backgroundColor": "#ffffff",
-          "view": 7
-        },
-        {
           "id": "IEvWMSmqVawJWrD_vcDw73322",
           "url": "https://www.qianwen.com/",
           "name": "通义千问",
@@ -46,24 +26,42 @@
           "view": 161
         },
         {
-          "id": "ouQMWhlcgCqYL6sGhWZPO3084",
-          "url": "https://www.wolai.com/",
-          "name": "我来",
-          "src": "https://files.codelife.cc/icons/www.wolai.com.svg",
+          "id": "KOxsK2M75AIKUxS6QdXbc4064",
+          "url": "https://chatglm.cn/",
+          "name": "智谱清言",
+          "src": "https://files.codelife.cc/icons/chatglm.cn.png",
           "type": "icon",
-          "iconText": "我来",
-          "backgroundColor": "#FFFFFF",
-          "view": 1
+          "iconText": "智谱清",
+          "backgroundColor": "#ffffff",
+          "view": 11
         },
         {
-          "url": "https://www.deepl.com/zh/translator",
+          "url": "https://flowus.cn",
           "type": "icon",
-          "name": "DeepL翻译",
-          "src": "https://files.codelife.cc/icons/deepl.svg",
-          "backgroundColor": "#ffffff",
-          "id": "Sb_-UbbzgfmCzOc9mpho05455",
-          "view": 21,
-          "iconText": "Dee"
+          "name": "FlowUs",
+          "src": "https://files.codelife.cc/icons/flowus.svg",
+          "id": "-o_tStwuqJwlZhV7HgM9M6371",
+          "view": 148,
+          "iconText": "Flo",
+          "backgroundColor": "#fff"
+        },
+        {
+          "id": "GHtWiJ-S7put3xQnxymgL6876",
+          "url": "https://dash.cloudflare.com/",
+          "name": "Cloudflare",
+          "src": "https://files.codelife.cc/website/604ad9938af9860fb41a9dde.png",
+          "type": "icon",
+          "iconText": "Clo",
+          "view": 37
+        },
+        {
+          "url": "https://tophub.today/",
+          "type": "icon",
+          "name": "今日热榜",
+          "src": "https://files.codelife.cc/icons/tophubtopday.svg",
+          "backgroundColor": "#fff",
+          "id": "29f06Mpwa11aOBNJjMPp67195",
+          "view": 12
         },
         {
           "url": "https://www.infoq.cn/",
@@ -142,7 +140,9 @@
           "view": 28
         },
         {
-          "categorys": ["design"],
+          "categorys": [
+            "design"
+          ],
           "name": "渐变色",
           "component": "webGradients",
           "type": "icon",
@@ -153,14 +153,6 @@
           "size": "1x1",
           "id": "pHzvW6jK2u3MEmQvzN3MZ4624",
           "view": 4
-        },
-        {
-          "url": "https://cls88i1wk5.feishu.cn/drive/home/",
-          "type": "icon",
-          "name": "飞书文档",
-          "src": "https://files.codelife.cc/icons/feishu.svg",
-          "backgroundColor": "#fff",
-          "id": "WOqvRXmI4S_nC-yxTpxqP6902"
         },
         {
           "url": "https://xiezuocat.com/?s=itab",
@@ -274,15 +266,6 @@
           "view": 1
         },
         {
-          "id": "GHtWiJ-S7put3xQnxymgL6876",
-          "url": "https://dash.cloudflare.com/",
-          "name": "Cloudflare",
-          "src": "https://files.codelife.cc/website/604ad9938af9860fb41a9dde.png",
-          "type": "icon",
-          "iconText": "Clo",
-          "view": 37
-        },
-        {
           "id": "8cJ2D8x7TMycSiQkM3J7P0684",
           "url": "https://ai-bot.cn/",
           "name": "AI工具集",
@@ -291,16 +274,6 @@
           "iconText": "AI工",
           "backgroundColor": "#fff",
           "view": 4
-        },
-        {
-          "id": "KOxsK2M75AIKUxS6QdXbc4064",
-          "url": "https://chatglm.cn/",
-          "name": "智谱清言",
-          "src": "https://files.codelife.cc/icons/chatglm.cn.png",
-          "type": "icon",
-          "iconText": "智谱清",
-          "backgroundColor": "#ffffff",
-          "view": 11
         },
         {
           "id": "2j2KDwHCjfBw-YccbJD1K4068",
@@ -391,15 +364,6 @@
           "view": 2
         },
         {
-          "url": "https://tophub.today/",
-          "type": "icon",
-          "name": "今日热榜",
-          "src": "https://files.codelife.cc/icons/tophubtopday.svg",
-          "backgroundColor": "#fff",
-          "id": "29f06Mpwa11aOBNJjMPp67195",
-          "view": 12
-        },
-        {
           "id": "EyNx9FDi-krwEDnPAxOQL7543",
           "url": "https://locallytools.com/zh-Hans",
           "name": "LocallyTools",
@@ -408,6 +372,36 @@
           "iconText": "Loc",
           "backgroundColor": "#f01313",
           "view": 1
+        },
+        {
+          "id": "site-ml7yktk0-rxejg",
+          "name": "OpenRouter",
+          "url": "https://openrouter.ai/"
+        },
+        {
+          "id": "site-ml95hmn1-oktif",
+          "name": "skills.sh",
+          "url": "https://skills.sh/"
+        },
+        {
+          "id": "site-ml9682k5-jz4y8",
+          "name": "skillsmp",
+          "url": "https://skillsmp.com/"
+        },
+        {
+          "id": "site-ml9pc63k-m3i90",
+          "name": "GitHub",
+          "url": "https://github.com/"
+        },
+        {
+          "id": "site-mlg5jhwj-gnz9r",
+          "name": "Pixso",
+          "url": "https://pixso.cn/"
+        },
+        {
+          "id": "site-mlizsukn-9sdm3",
+          "name": "ZCode",
+          "url": "https://zcode.z.ai/cn"
         }
       ]
     },
@@ -543,7 +537,7 @@
         },
         {
           "name": "微信开放平台",
-          "url": "https://open.weixin.qq.com/cgi-bin/index?t=home/index\u0026lang=zh_CN\u0026token=4c9d8cf4e8158a36a4cbf43e496e50d68d1466b1",
+          "url": "https://open.weixin.qq.com/cgi-bin/index?t=home/index&lang=zh_CN&token=4c9d8cf4e8158a36a4cbf43e496e50d68d1466b1",
           "backgroundColor": "#ffffff"
         },
         {

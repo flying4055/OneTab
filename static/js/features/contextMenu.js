@@ -10,12 +10,14 @@ export function openContextMenu(x, y, target) {
     const isSite = target.type === 'site';
     const isSearch = target.type === 'search';
     const isEmpty = target.type === 'empty';
+    
+    // 先隐藏所有项，再显示对应项
     menu.querySelectorAll('[data-context]').forEach(item => {
-        const context = item.dataset.context;
-        const visible = (context === 'site' && isSite)
-            || (context === 'search' && isSearch)
-            || (context === 'empty' && isEmpty);
-        item.classList.toggle('is-hidden', !visible);
+        item.classList.add('is-hidden');
+    });
+    
+    menu.querySelectorAll(`[data-context="${target.type}"]`).forEach(item => {
+        item.classList.remove('is-hidden');
     });
 
     menu.classList.add('is-visible');
@@ -24,15 +26,18 @@ export function openContextMenu(x, y, target) {
         const rect = menu.getBoundingClientRect();
         let left = x;
         let top = y;
-        const padding = 12;
+        const padding = 16;
+        
+        // 优先向右下方显示，避免遮挡
         if (left + rect.width > window.innerWidth - padding) {
-            left = window.innerWidth - rect.width - padding;
+            left = Math.max(padding, x - rect.width);
         }
         if (top + rect.height > window.innerHeight - padding) {
-            top = window.innerHeight - rect.height - padding;
+            top = Math.max(padding, y - rect.height);
         }
-        menu.style.left = `${Math.max(left, padding)}px`;
-        menu.style.top = `${Math.max(top, padding)}px`;
+        
+        menu.style.left = `${left}px`;
+        menu.style.top = `${top}px`;
     });
 }
 

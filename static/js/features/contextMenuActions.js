@@ -11,6 +11,7 @@ export function bindContextMenuActions() {
         if (!action) return;
         const contextTarget = getContextTarget();
         if (action === 'add') {
+            // 总是在当前页的最后添加
             openBookmarkModal('add', { categoryIndex: state.activeIndex });
         }
         if (action === 'edit' && contextTarget?.type === 'site') {

@@ -103,7 +103,8 @@ export function handleModalSubmit() {
     const category = state.categories[modalState.categoryIndex];
     if (!category) return;
     if (!Array.isArray(category.items)) category.items = [];
-    category.items.unshift({ id: createSiteId(), name, url });
+    // 在当前页的最后加入（使用push而不是unshift）
+    category.items.push({ id: createSiteId(), name, url });
     saveNavData();
     renderSites();
     updateSearchResults();

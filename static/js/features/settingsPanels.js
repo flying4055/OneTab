@@ -3,7 +3,8 @@ const PANEL_META = {
     searchEngine: { title: '搜索引擎', sub: '管理默认搜索引擎与模板' },
     time: { title: '时间设置', sub: '配置时间显示样式' },
     wallpaper: { title: '壁纸设置', sub: '管理背景与预览' },
-    data: { title: '数据管理', sub: '导入导出书签数据' }
+    data: { title: '数据管理', sub: '导入导出书签数据' },
+    about: { title: '关于 OneTab', sub: '产品介绍与版本信息' }
 };
 
 export function initSettingsPanels() {
@@ -36,6 +37,8 @@ export function initSettingsPanels() {
             const placeholder = sections.find(sec => sec.dataset.panel === 'placeholder');
             if (placeholder) placeholder.classList.add('is-active');
         }
+        
+        // 移除了个人中心、搜索框、其它设置模块的特殊处理
     };
 
     navItems.forEach(btn => {
