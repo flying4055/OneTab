@@ -47,11 +47,9 @@ body {
     font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
     color: var(--text);
     background-color: var(--bg);
-    background-image: var(--wallpaper-image),
-        radial-gradient(1200px 600px at 20% -10%, rgba(122, 162, 255, 0.18), transparent 60%),
-        radial-gradient(1000px 600px at 80% 0%, rgba(48, 210, 255, 0.12), transparent 55%);
+    background-image: var(--wallpaper-image);
     background-repeat: no-repeat;
-    background-size: cover, 1200px 600px, 1000px 600px;
+    background-size: cover;
     background-position: center center, 20% -10%, 80% 0%;
     overflow: hidden;
 }
@@ -1281,6 +1279,16 @@ body {
     overflow: hidden;
 }
 
+.bookmark-icon-preview.is-transparent {
+    background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.24) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.24) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.24) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.24) 75%);
+    background-size: 12px 12px;
+    background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+}
+
 .bookmark-icon-preview-img {
     width: 100%;
     height: 100%;
@@ -1342,6 +1350,16 @@ body {
     display: inline-block;
 }
 
+.bookmark-icon-bg-trigger-swatch.is-transparent {
+    background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.24) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.24) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.24) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.24) 75%);
+    background-size: 10px 10px;
+    background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+}
+
 .bookmark-icon-bg-trigger-text {
     line-height: 1;
 }
@@ -1364,6 +1382,16 @@ body {
 .bookmark-icon-bg-preset:hover {
     transform: translateY(-1px);
     border-color: rgba(255, 255, 255, 0.45);
+}
+
+.bookmark-icon-bg-preset.is-transparent {
+    background-image:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.24) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 255, 255, 0.24) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.24) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.24) 75%);
+    background-size: 10px 10px;
+    background-position: 0 0, 0 5px, 5px -5px, -5px 0;
 }
 
 .modal-footer {

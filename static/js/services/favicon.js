@@ -24,7 +24,6 @@ const LOCAL_FILE_PATH_PREFIXES = [
 const pendingIconRequests = new Map();
 const resolvedSiteIconCache = new Map();
 const failedSiteIconCache = new Map();
-let hasPurgedLegacyCache = false;
 
 function normalizeUrlForParsing(rawUrl) {
     const value = String(rawUrl || '').trim();
@@ -350,48 +349,26 @@ export function getIcon(site) {
     return firstCandidate || '';
 }
 
-// 无缓存模式：保留兼容接口
 export async function loadFaviconCache() {
     state.faviconCache = {};
     pendingIconRequests.clear();
     resolvedSiteIconCache.clear();
     failedSiteIconCache.clear();
-
-    if (hasPurgedLegacyCache) return;
-    hasPurgedLegacyCache = true;
-
-    try {
-        localStorage.removeItem('favicon_cache_v1');
-    } catch {
-        // Ignore.
-    }
-
-    if (typeof indexedDB !== 'undefined' && indexedDB?.deleteDatabase) {
-        try {
-            indexedDB.deleteDatabase('OneTabIconCache');
-        } catch {
-            // Ignore.
-        }
-    }
 }
 
-// 无缓存模式：保留兼容接口
 export function saveFaviconCache() {
 }
 
-// 无缓存模式：保留兼容接口
 export async function cacheFavicon(domain, dataUrl) {
     void domain;
     void dataUrl;
 }
 
-// 无缓存模式：保留兼容接口
 export async function getCachedFavicon(domain) {
     void domain;
     return '';
 }
 
-// 无缓存模式：保留兼容接口
 export async function tryCacheIcon(img, domain) {
     void img;
     void domain;

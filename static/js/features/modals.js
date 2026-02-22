@@ -9,7 +9,8 @@ const ICON_CANVAS_SIZE = 160;
 const ICON_WEBP_QUALITY_STEPS = [0.92, 0.84, 0.76, 0.68];
 const ICON_MAX_DATA_URL_LENGTH = 240_000;
 const BG_COLOR_KEY = 'bg-color';
-const DEFAULT_ICON_BG_COLOR = '#f0f9ff';
+const DEFAULT_ICON_BG_COLOR = 'transparent';
+const COLOR_PICKER_FALLBACK_VALUE = '#ffffff';
 
 let modalState = {
     mode: 'add',
@@ -40,9 +41,12 @@ function clearIconPreview() {
 
 function normalizeIconBackgroundColor(value) {
     const raw = String(value || '').trim();
-    if (!raw) return '';
+    if (!raw) return 'transparent';
+
     const lower = raw.toLowerCase();
-    if (lower === 'transparent') return '';
+    if (lower === 'transparent' || lower === 'none' || lower === 'rgba(0,0,0,0)' || lower === 'rgba(0, 0, 0, 0)') {
+        return 'transparent';
+    }
 
     if (/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(raw)) {
         if (raw.length === 4) {
@@ -81,20 +85,25 @@ function getEffectiveIconBgColor() {
 function syncIconBgInput() {
     if (!els.bookmarkIconBgColor) return;
     const effectiveColor = getEffectiveIconBgColor();
-    els.bookmarkIconBgColor.value = effectiveColor;
+    els.bookmarkIconBgColor.value = effectiveColor === 'transparent'
+        ? COLOR_PICKER_FALLBACK_VALUE
+        : effectiveColor;
     syncIconBgTriggerSwatch(effectiveColor);
 }
 
 function syncIconBgTriggerSwatch(colorValue) {
     if (!els.bookmarkIconBgTriggerSwatch) return;
     const normalized = normalizeIconBackgroundColor(colorValue) || DEFAULT_ICON_BG_COLOR;
-    els.bookmarkIconBgTriggerSwatch.style.backgroundColor = normalized;
+    els.bookmarkIconBgTriggerSwatch.style.backgroundColor = normalized === 'transparent' ? 'transparent' : normalized;
+    els.bookmarkIconBgTriggerSwatch.classList.toggle('is-transparent', normalized === 'transparent');
 }
 
 function renderIconPreview() {
     if (!els.bookmarkIconPreview) return;
     clearIconPreview();
-    els.bookmarkIconPreview.style.backgroundColor = getEffectiveIconBgColor();
+    const effectiveBgColor = getEffectiveIconBgColor();
+    els.bookmarkIconPreview.style.backgroundColor = effectiveBgColor === 'transparent' ? 'transparent' : effectiveBgColor;
+    els.bookmarkIconPreview.classList.toggle('is-transparent', effectiveBgColor === 'transparent');
 
     const effectiveIconSrc = getEffectiveIconSrc();
     if (effectiveIconSrc) {

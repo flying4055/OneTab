@@ -24,11 +24,6 @@ export function bindContextMenuActions() {
             return;
         }
 
-        if (action === 'custom-icon' && contextTarget?.type === 'site') {
-            openBookmarkModal('edit', contextTarget, { focusIconEditor: true });
-            return;
-        }
-
         if (action === 'delete' && contextTarget?.type === 'site') {
             openBookmarkModal('delete', contextTarget);
             return;

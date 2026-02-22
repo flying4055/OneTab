@@ -197,7 +197,7 @@ function createSiteCard(site, idx, renderToken, lazyIconEntries, priorityIconEnt
 
     const icon = document.createElement('div');
     icon.className = 'site-icon';
-    icon.style.backgroundColor = site['bg-color'] || site.backgroundColor || '#f0f9ff';
+    icon.style.backgroundColor = site['bg-color'] || site.backgroundColor || 'transparent';
     icon.dataset.siteIconKey = getSiteIconCacheKey(site);
 
     const placeholder = document.createElement('span');
