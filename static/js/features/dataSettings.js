@@ -1,10 +1,10 @@
 import { els } from '../core/elements.js';
 import { state } from '../core/state.js';
-import { normalizeNav } from '../core/utils.js';
-import { saveNavData } from '../services/navStorage.js';
 import { renderTabs } from './tabs.js';
 import { renderSites } from './sites.js';
 import { updateSearchResults } from './search.js';
+import { normalizeAndValidateNavPayload } from '../contracts/storageContracts.js';
+import { replaceCategories } from '../services/navCommands.js';
 
 function exportBookmarks() {
     const payload = { version: 1, categories: state.categories };
@@ -23,10 +23,12 @@ function exportBookmarks() {
 async function importBookmarks(file) {
     const text = await file.text();
     const data = JSON.parse(text);
-    const normalized = normalizeNav(data);
-    state.categories = normalized.categories || [];
-    state.activeIndex = 0;
-    saveNavData();
+    const normalized = normalizeAndValidateNavPayload(data);
+    if (!normalized) {
+        throw new Error('invalid-nav-schema');
+    }
+    const nextCategories = normalized.categories || [];
+    replaceCategories(nextCategories, { persist: true, keepActiveIndex: false });
     renderTabs();
     renderSites();
     updateSearchResults();

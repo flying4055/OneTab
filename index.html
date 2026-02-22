@@ -78,6 +78,14 @@
             </svg>
             编辑书签
         </button>
+        <button type="button" class="context-item" data-action="custom-icon" data-context="site">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-2 0H5V5h14v14z"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <path d="M6 17l3.5-4.5 2.5 3 3.5-4.5L18 17z"/>
+            </svg>
+            编辑图标
+        </button>
         <button type="button" class="context-item context-danger" data-action="delete" data-context="site">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
@@ -114,6 +122,42 @@
                     <span>链接</span>
                     <input id="bookmarkUrl" type="url" placeholder="https://www.zhihu.com">
                 </label>
+                <div class="field">
+                    <span>图标</span>
+                    <div class="bookmark-icon-editor">
+                        <div id="bookmarkIconPreview" class="bookmark-icon-preview">
+                            <span class="bookmark-icon-placeholder">未设置</span>
+                        </div>
+                        <div class="bookmark-icon-actions">
+                            <button id="bookmarkIconUploadBtn" type="button" class="btn btn-ghost btn-small">上传图片</button>
+                            <button id="bookmarkIconResetBtn" type="button" class="btn btn-ghost btn-small">移除自定义</button>
+                        </div>
+                        <input id="bookmarkIconFile" type="file" accept="image/*" class="proxy-input">
+                        <div class="field-note">支持图片上传，保存时自动转换为 WebP。</div>
+                    </div>
+                </div>
+                <div class="field">
+                    <span>图标背景色</span>
+                    <div class="bookmark-icon-bg-editor">
+                        <div class="bookmark-icon-bg-row">
+                            <input id="bookmarkIconBgColor" type="color" value="#f0f9ff" class="proxy-input">
+                            <button id="bookmarkIconBgTriggerBtn" type="button" class="bookmark-icon-bg-trigger" aria-label="选择图标背景色">
+                                <span id="bookmarkIconBgTriggerSwatch" class="bookmark-icon-bg-trigger-swatch"></span>
+                                <span class="bookmark-icon-bg-trigger-text">选择颜色</span>
+                            </button>
+                            <button id="bookmarkIconBgResetBtn" type="button" class="btn btn-ghost btn-small">重置默认</button>
+                        </div>
+                        <div class="bookmark-icon-bg-presets" id="bookmarkIconBgPresets">
+                            <button type="button" class="bookmark-icon-bg-preset" data-color="#f0f9ff" style="--preset-color:#f0f9ff" aria-label="浅蓝"></button>
+                            <button type="button" class="bookmark-icon-bg-preset" data-color="#ffffff" style="--preset-color:#ffffff" aria-label="白色"></button>
+                            <button type="button" class="bookmark-icon-bg-preset" data-color="#111827" style="--preset-color:#111827" aria-label="深色"></button>
+                            <button type="button" class="bookmark-icon-bg-preset" data-color="#1f2937" style="--preset-color:#1f2937" aria-label="石墨"></button>
+                            <button type="button" class="bookmark-icon-bg-preset" data-color="#fef3c7" style="--preset-color:#fef3c7" aria-label="米黄"></button>
+                            <button type="button" class="bookmark-icon-bg-preset" data-color="#dcfce7" style="--preset-color:#dcfce7" aria-label="浅绿"></button>
+                        </div>
+                        <div class="field-note">用于填充透明图标背景，提升对比度。</div>
+                    </div>
+                </div>
             </div>
             <div id="modalConfirm" class="modal-body is-hidden">
                 <p id="modalMessage"></p>

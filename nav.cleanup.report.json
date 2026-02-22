@@ -1,0 +1,12 @@
+{
+  "inputFile": "nav.json",
+  "categoryCount": 3,
+  "totalItems": 174,
+  "droppedInvalid": 0,
+  "droppedDuplicateInCategory": 0,
+  "droppedDuplicateGlobal": 0,
+  "generatedItemIdCount": 0,
+  "preservedSrcCount": 55,
+  "preservedBgColorCount": 55,
+  "globalDuplicateDetails": []
+}

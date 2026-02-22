@@ -1,11 +1,9 @@
 import { els } from './core/elements.js';
-import { state } from './core/state.js';
 import { loadFaviconCache } from './services/favicon.js';
 import { loadNavData } from './services/navStorage.js';
 import { renderTabs } from './features/tabs.js';
 import { renderSites, bindSiteGridDrag } from './features/sites.js';
 import {
-    setupEngines,
     bindSearchInput,
     hideSearchResults,
     bindEngineSelectEvents
@@ -20,6 +18,12 @@ import { initSettingsPanels } from './features/settingsPanels.js';
 import { initEngineSettings } from './features/engineSettings.js';
 import { initTimeSettings } from './features/timeSettings.js';
 import { initDataSettings } from './features/dataSettings.js';
+import {
+    initPerfBaseline,
+    markBootstrapStart,
+    markBootstrapEnd
+} from './services/perfBaseline.js';
+import { initializeNavState } from './services/navCommands.js';
 
 function bindGlobalContextMenu() {
     if (els.sidebar) {
@@ -73,7 +77,10 @@ function bindGlobalEvents() {
 }
 
 async function init() {
-    loadFaviconCache();
+    initPerfBaseline();
+    markBootstrapStart();
+
+    await loadFaviconCache();
     loadWallpaper();
     initUiSettings();
     initSettingsPanels();
@@ -81,8 +88,8 @@ async function init() {
     initTimeSettings();
     initDataSettings();
     const categories = await loadNavData();
-    state.categories = categories;
-    state.activeIndex = 0;
+    initializeNavState(categories);
+    
     renderTabs();
     renderSites();
     updateWallpaperUI();
@@ -100,6 +107,8 @@ async function init() {
     if (els.app) {
         els.app.removeAttribute('data-cloak');
     }
+
+    markBootstrapEnd();
 }
 
 init();

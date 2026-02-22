@@ -1,3 +1,12 @@
 .codex
 .qoder
 .trae
+
+# vscode
+.vscode/
+
+# node modules
+node_modules/
+
+# tests
+tests/

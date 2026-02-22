@@ -6,26 +6,41 @@ import { state } from '../core/state.js';
 
 export function bindContextMenuActions() {
     if (!els.contextMenu) return;
-    els.contextMenu.addEventListener('click', (e) => {
-        const action = e.target.closest('[data-action]')?.dataset.action;
+
+    els.contextMenu.addEventListener('click', async (event) => {
+        const action = event.target.closest('[data-action]')?.dataset.action;
         if (!action) return;
+
         const contextTarget = getContextTarget();
+        closeContextMenu();
+
         if (action === 'add') {
-            // 总是在当前页的最后添加
             openBookmarkModal('add', { categoryIndex: state.activeIndex });
+            return;
         }
+
         if (action === 'edit' && contextTarget?.type === 'site') {
             openBookmarkModal('edit', contextTarget);
+            return;
         }
+
+        if (action === 'custom-icon' && contextTarget?.type === 'site') {
+            openBookmarkModal('edit', contextTarget, { focusIconEditor: true });
+            return;
+        }
+
         if (action === 'delete' && contextTarget?.type === 'site') {
             openBookmarkModal('delete', contextTarget);
+            return;
         }
+
         if (action === 'copy' && contextTarget?.type === 'search') {
-            copySearchInput();
+            await copySearchInput();
+            return;
         }
+
         if (action === 'paste' && contextTarget?.type === 'search') {
-            pasteSearchInputPlainText();
+            await pasteSearchInputPlainText();
         }
-        closeContextMenu();
     });
 }

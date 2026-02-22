@@ -1,0 +1,16 @@
+{
+  "name": "one-tab-new-tab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:syntax": "node scripts/check-syntax.mjs",
+    "test": "node --test",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "verify": "npm run check:syntax && npm run test && npm run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.3"
+  }
+}

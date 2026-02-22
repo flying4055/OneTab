@@ -1,12 +1,13 @@
 ﻿{
   "manifest_version": 3,
-  "name": "OneTab New Tab",
-  "version": "1.0.0",
+  "name": "OneTab",
+  "version": "1.2.0",
   "description": "自定义新标签页导航",
+  "permissions": ["favicon"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google.com https://*.google.com https://www.gstatic.com https://*.gstatic.com https://files.codelife.cc https://img.alicdn.com https://w1.v2ai.top https://s.w.org"
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: http:"
   }
 }

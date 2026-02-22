@@ -8,6 +8,10 @@ import {
     WALLPAPER_OPTIMIZE_THRESHOLD,
     WALLPAPER_MAX_DATA_URL
 } from '../core/constants.js';
+import {
+    parseWallpaperStorageValue,
+    serializeWallpaperStorageValue
+} from '../contracts/storageContracts.js';
 
 export function applyWallpaper(dataUrl) {
     const next = dataUrl || '';
@@ -20,9 +24,14 @@ export function applyWallpaper(dataUrl) {
 
 export function loadWallpaper() {
     try {
-        const dataUrl = localStorage.getItem(WALLPAPER_STORAGE_KEY);
+        const raw = localStorage.getItem(WALLPAPER_STORAGE_KEY);
+        const dataUrl = parseWallpaperStorageValue(raw);
         if (dataUrl) {
             applyWallpaper(dataUrl);
+            return;
+        }
+        if (raw) {
+            localStorage.removeItem(WALLPAPER_STORAGE_KEY);
         }
     } catch {
         // Ignore storage errors.
@@ -30,9 +39,10 @@ export function loadWallpaper() {
 }
 
 function saveWallpaper(dataUrl) {
-    if (!dataUrl) return false;
+    const serialized = serializeWallpaperStorageValue(dataUrl);
+    if (!serialized) return false;
     try {
-        localStorage.setItem(WALLPAPER_STORAGE_KEY, dataUrl);
+        localStorage.setItem(WALLPAPER_STORAGE_KEY, serialized);
         return true;
     } catch {
         return false;

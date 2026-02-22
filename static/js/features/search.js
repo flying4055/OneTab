@@ -1,7 +1,16 @@
 import { state } from '../core/state.js';
 import { els } from '../core/elements.js';
 import { SEARCH_RESULT_LIMIT } from '../core/constants.js';
-import { getDomain, formatDomainLabel } from '../core/utils.js';
+import { formatDomainLabel } from '../core/utils.js';
+import { recordSearchLatency } from '../services/perfBaseline.js';
+import { rebuildSearchIndex, querySearchIndex } from '../services/searchIndex.js';
+
+function getNow() {
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+        return performance.now();
+    }
+    return Date.now();
+}
 
 export function setupEngines() {
     if (!els.engineSelectBtn || !els.engineSelectLabel || !els.engineSelectDropdown) return;
@@ -120,57 +129,10 @@ export function handleSearch() {
     window.open(target, '_blank');
 }
 
-function getAllSites() {
-    const list = [];
-    state.categories.forEach((cat, categoryIndex) => {
-        (cat.items || []).forEach((item, itemIndex) => {
-            if (!item) return;
-            list.push({
-                name: item.name || '',
-                url: item.url || '',
-                categoryLabel: cat.label || '',
-                categoryIndex,
-                itemIndex,
-                domain: getDomain(item.url || '')
-            });
-        });
-    });
-    return list;
-}
-
-function scoreSearchMatch(query, site) {
-    if (!query) return 0;
-    const q = query.toLowerCase();
-    const name = (site.name || '').toLowerCase();
-    const domain = (site.domain || '').toLowerCase();
-    const cleanDomain = domain.replace(/^www\./, '');
-    const url = (site.url || '').toLowerCase();
-    let score = 0;
-
-    if (name === q) score += 6;
-    else if (name.startsWith(q)) score += 4;
-    else if (name.includes(q)) score += 2;
-
-    if (domain === q || cleanDomain === q) score += 5;
-    else if (domain.startsWith(q) || cleanDomain.startsWith(q)) score += 3;
-    else if (domain.includes(q) || cleanDomain.includes(q)) score += 1;
-
-    if (url.includes(q)) score += 1;
-
-    return score;
-}
-
 function getSearchMatches(value) {
     const query = value.trim();
     if (!query) return [];
-    return getAllSites()
-        .map(site => ({
-            ...site,
-            score: scoreSearchMatch(query, site)
-        }))
-        .filter(site => site.score > 0)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, SEARCH_RESULT_LIMIT);
+    return querySearchIndex(query, SEARCH_RESULT_LIMIT);
 }
 
 function renderSearchResults(query, results) {
@@ -245,11 +207,11 @@ export function hideSearchResults() {
 }
 
 export function updateSearchResults() {
-    if (!els.searchInput) return;
+    if (!els.searchInput) return 0;
     const value = els.searchInput.value.trim();
     if (!value) {
         hideSearchResults();
-        return;
+        return 0;
     }
     const results = getSearchMatches(value);
     state.searchMatches = results;
@@ -257,12 +219,16 @@ export function updateSearchResults() {
         state.searchActiveIndex = -1;
     }
     renderSearchResults(value, results);
+    return results.length;
 }
 
 export function handleSearchInput(e) {
     state.searchInputValue = e.target.value;
     state.searchActiveIndex = -1;
-    updateSearchResults();
+    const startMs = getNow();
+    const resultCount = updateSearchResults();
+    const durationMs = getNow() - startMs;
+    recordSearchLatency(state.searchInputValue, resultCount, durationMs);
 }
 
 export function handleSearchKeydown(e) {
@@ -339,4 +305,8 @@ export function bindSearchInput() {
     if (!els.searchInput) return;
     els.searchInput.addEventListener('keydown', handleSearchKeydown);
     els.searchInput.addEventListener('input', handleSearchInput);
+}
+
+export function rebuildSearchData() {
+    rebuildSearchIndex(state.categories);
 }

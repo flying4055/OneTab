@@ -1,7 +1,8 @@
 import { state } from '../core/state.js';
 import { els } from '../core/elements.js';
-import { saveNavData } from '../services/navStorage.js';
 import { renderSites } from './sites.js';
+import { setActiveTabIndex, reorderCategory } from '../services/navCommands.js';
+import { updateSearchResults } from './search.js';
 
 export function renderTabs() {
     if (!els.tabBar) return;
@@ -14,7 +15,7 @@ export function renderTabs() {
         li.dataset.index = String(idx);
 
         li.addEventListener('click', () => {
-            state.activeIndex = idx;
+            setActiveTabIndex(idx);
             renderTabs();
             renderSites();
         });
@@ -27,11 +28,11 @@ export function renderTabs() {
 
         li.addEventListener('drop', () => {
             if (state.dragIndex === null || state.dragIndex === idx) return;
-            const moved = state.categories.splice(state.dragIndex, 1)[0];
-            state.categories.splice(idx, 0, moved);
+            reorderCategory(state.dragIndex, idx);
             state.dragIndex = null;
-            saveNavData();
             renderTabs();
+            renderSites();
+            updateSearchResults();
         });
 
         els.tabBar.appendChild(li);
