@@ -1,83 +1,70 @@
-# OneTab 架构方案（全新规划）
+# OneTab MUI 重构架构方案（对标 WeTab）
 
-**目标**
-1. 通过模块化提升可维护性。  
-2. 降低渲染开销，使 UI 更新更增量化。  
-3. 规范数据存储与迁移路径。  
-4. 强化离线与 CSP 约束下的韧性。
+## 1. 目标与范围
 
-**拟议目录结构**
-1. `src/`  
-- `ui/`：UI 渲染与模板。  
-- `state/`：状态容器、选择器、变更方法。  
-- `services/`：存储、favicon、壁纸、搜索服务。  
-- `features/`：功能域（search/bookmarks/settings/context-menu）。
-2. `public/`  
-- 静态资源与 `manifest.json`。
-3. `data/`  
-- `nav.json` 数据种子与版本说明。
+- 以 MUI 为主导重构 UI 层，尽可能使用官方组件与主题系统。
+- 对标 WeTab 的核心体验：快速搜索、分组导航、可视化卡片、个性化主题、便捷设置。
+- 保留现有 MV3 扩展能力与本地数据兼容（`nav_data_v1` / `tab_state_v1` / `wallpaper_v1`）。
+- 先完成架构升级与功能对齐，再逐步替换旧 DOM 渲染逻辑。
 
-**关键模块**
-1. Storage Service  
-- 抽象 localStorage 读写。  
-- 使用 `schemaVersion` 管理迁移。  
-- 提供 `loadNav()`、`saveNav()` 等接口。
-2. Render Service  
-- 对分类、书签、搜索结果做增量更新。  
-- 统一处理键盘焦点与可访问性。
-3. Search Service  
-- 启动时构建索引。  
-- 提供排序与域名缓存。
-4. Wallpaper Service  
-- 上传校验、缩放、持久化。  
-- 为未来在线图库留出扩展点。
-5. Context Menu Service  
-- 按目标类型声明式配置菜单。
+## 2. 对标 WeTab 的功能设计
 
-**状态模型**
-1. `appState`  
-- `categories`、`activeCategoryId`  
-- `searchQuery`、`searchMatches`、`searchActiveIndex`  
-- `wallpaper`、`ui` 标志位
-2. 状态变更  
-- 所有写操作统一走 `mutations`，确保一致性。
-3. 选择器  
-- `getActiveCategory()`、`getSearchResults()`。
+- 工作台首页：顶部搜索 + 分组标签 + 网站卡片网格。
+- 多引擎搜索：支持默认引擎、快捷切换、回车直达。
+- 分组管理：分组增删改、拖拽排序、分组内站点排序。
+- 卡片能力：图标、标题、网址、副操作菜单（编辑/删除/打开）。
+- 个性化：深浅色模式、主题色、壁纸、卡片圆角/密度配置。
+- 设置中心：数据导入导出、搜索与外观配置、实验功能开关。
 
-**数据流**
-1. 启动  
-- 载入导航数据、favicon 缓存、壁纸。  
-- 构建搜索索引并首次渲染。
-2. 交互  
-- 事件 → 变更 → 增量渲染。
-3. 持久化  
-- 变更触发带防抖的存储写入。
+## 3. 技术约束与关键决策
 
-**性能计划**
-1. 重操作防抖  
-- 导航变更后重建搜索索引。  
-- 持久化加短防抖。
-2. DOM 细粒度更新  
-- 优先使用 keyed patch，避免全量重渲染。
-3. 图片延迟加载  
-- 使用 `loading="lazy"` 并固定占位尺寸。
+- 当前是 Chrome/Edge MV3 扩展，`script-src 'self'`，不允许 CDN 远程脚本。
+- MUI 基于 React，建议引入 React + MUI + Emotion 的本地构建产物。
+- 保留现有 services 层（storage/search/favicon），先做 UI 适配，再做领域重构。
+- 采用渐进迁移：新旧页面可并行切换，确保功能可回退。
 
-**安全与 CSP**
-1. 统一的资源白名单配置。  
-2. 使用前校验用户输入 URL。  
-3. 资源受阻时提供安全降级。
+## 4. 分层架构
 
-**测试计划**
-1. 单元测试：存储与搜索排序。  
-2. 集成测试：书签 CRUD 与持久化。  
-3. UI 测试：键盘导航与右键菜单。
+- UI Layer（MUI）：负责页面布局、交互组件、主题与无障碍。
+- ViewModel Layer：把领域状态映射为 UI 可消费模型，统一事件分发。
+- Domain Layer：分类、站点、搜索、设置、壁纸等业务逻辑。
+- Infrastructure Layer：`localStorage` 持久化、favicon 获取、数据迁移。
 
-**迁移计划**
-1. 在存储数据中引入 `schemaVersion`。  
-2. 启动时做数据迁移。  
-3. 至少保留一个版本的向后兼容。
+## 5. MUI 组件映射
 
-**里程碑**
-1. Phase 1：拆分文件，建立存储/搜索服务。  
-2. Phase 2：增量渲染与持久化防抖。  
-3. Phase 3：测试与迁移工具完善。
+- 页面框架：`CssBaseline` + `AppBar` + `Toolbar` + `Container` + `Drawer`。
+- 分组与导航：`Tabs` / `Tab` + `Badge` + `Menu` + `MenuItem`。
+- 站点卡片：`Card` + `CardActionArea` + `CardContent` + `Avatar` + `Tooltip`。
+- 搜索区：`TextField` + `Autocomplete` + `InputAdornment` + `IconButton`。
+- 操作反馈：`Dialog` + `Snackbar` + `Alert` + `Backdrop` + `CircularProgress`。
+- 设置面板：`Accordion` + `Switch` + `Select` + `Slider` + `Divider`。
+
+## 6. 模块重组建议
+
+- `src/app/`：应用入口、路由壳层、全局 Provider。
+- `src/features/dashboard/`：首页、分组条、卡片网格。
+- `src/features/search/`：搜索框、引擎切换、建议列表。
+- `src/features/settings/`：设置主页、子面板、数据工具。
+- `src/shared/`：主题、通用组件、hooks、常量、类型。
+- `src/services/`：复用现有存储/索引/favicon 服务并提供适配器。
+
+## 7. 状态与数据流
+
+- 全局状态建议：`ui`、`navigation`、`search`、`settings`、`wallpaper`。
+- 数据流：UI Event -> ViewModel Action -> Domain Mutation -> Storage Persist。
+- 启动流程：加载持久化数据 -> 执行 schema 迁移 -> 构建搜索索引 -> 首屏渲染。
+- 持久化策略：关键写入防抖，失败时回退内存态并给出 `Snackbar` 提示。
+
+## 8. 迁移阶段
+
+- Phase 1（基础）：搭建 React + MUI 壳层，接入主题与首页静态骨架。
+- Phase 2（核心）：迁移搜索、分组、站点卡片 CRUD 与右键菜单。
+- Phase 3（完善）：迁移设置中心、壁纸与导入导出，补齐可访问性与测试。
+- Phase 4（收敛）：移除旧渲染路径，完成性能基线对比与发布验收。
+
+## 9. 验收标准
+
+- 功能对齐：WeTab 对标清单中的核心能力全部可用。
+- 体验一致：深浅色主题、键盘可达性、交互反馈完整。
+- 数据安全：历史数据自动迁移且无破坏性变更。
+- 性能达标：首屏可交互与搜索响应不弱于当前版本。
