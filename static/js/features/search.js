@@ -12,23 +12,60 @@ function getNow() {
     return Date.now();
 }
 
+function getEngineIconHTML(engineLabel) {
+    if (engineLabel.includes('Google')) {
+        return '<img src="https://www.google.com/favicon.ico" alt="Google">';
+    } else if (engineLabel.includes('Bing')) {
+        return '<img src="https://cn.bing.com/favicon.ico" alt="Bing">';
+    } else if (engineLabel.includes('百度') || engineLabel.includes('Baidu')) {
+        return '<img src="https://www.baidu.com/favicon.ico" alt="百度">';
+    } else if (engineLabel.includes('Duck')) {
+        return '<img src="https://duckduckgo.com/favicon.ico" alt="DuckDuckGo">';
+    }
+    // Search icon for others / default "Search" option
+    return `<svg viewBox="0 0 24 24" width="28" height="28" fill="#ff6b00"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>`;
+}
+
 export function setupEngines() {
-    if (!els.engineSelectBtn || !els.engineSelectLabel || !els.engineSelectDropdown) return;
+    if (!els.engineSelectBtn || !els.engineSelectIcon || !els.engineSelectDropdown) return;
     
+    const updateCurrentEngineIcon = (engine) => {
+        if (!engine) return;
+        els.engineSelectIcon.innerHTML = getEngineIconHTML(engine.label);
+    };
+
     // 更新标签显示当前选中的引擎
     const currentEngine = state.engines.find(engine => engine.value === state.selectedEngine);
-    if (currentEngine) {
-        els.engineSelectLabel.textContent = currentEngine.label;
-    }
+    updateCurrentEngineIcon(currentEngine);
     
     // 渲染下拉选项
     els.engineSelectDropdown.innerHTML = '';
-    state.engines.forEach(engine => {
+    state.engines.forEach((engine, index) => {
         const option = document.createElement('div');
         option.className = 'custom-select-option';
-        option.textContent = engine.label;
         option.setAttribute('role', 'option');
         option.setAttribute('data-value', engine.value);
+        
+        // Add delete button for non-default engines (you can adjust this logic)
+        const isDefault = ['搜索', 'Google', 'Bing', '百度', 'DuckDuckGo'].includes(engine.label);
+        const deleteBtnHtml = !isDefault ? `<button class="engine-delete-btn" aria-label="删除引擎"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>` : '';
+
+        // Add checkmark for selected option
+        const isSelected = engine.value === state.selectedEngine;
+        const checkmarkHtml = `<div class="engine-selected-check" style="opacity: ${isSelected ? 1 : 0};">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>`;
+
+        option.innerHTML = `
+            <div class="engine-icon-wrapper">
+                ${getEngineIconHTML(engine.label)}
+                ${deleteBtnHtml}
+            </div>
+            <div class="custom-select-option-label">${engine.label}</div>
+            ${checkmarkHtml}
+        `;
         
         // 标记当前选中项
         if (engine.value === state.selectedEngine) {
@@ -39,17 +76,24 @@ export function setupEngines() {
         }
         
         // 点击选项时更新状态
-        option.addEventListener('click', () => {
+        option.addEventListener('click', (e) => {
+            // If delete button is clicked, don't select the engine
+            if (e.target.closest('.engine-delete-btn')) {
+                e.stopPropagation();
+                // Placeholder for delete logic
+                state.engines.splice(index, 1);
+                if (state.selectedEngine === engine.value) {
+                    state.selectedEngine = state.engines[0]?.value || 'default';
+                }
+                setupEngines();
+                return;
+            }
+
             state.selectedEngine = engine.value;
-            els.engineSelectLabel.textContent = engine.label;
+            updateCurrentEngineIcon(engine);
             
-            // 更新选中状态
-            els.engineSelectDropdown.querySelectorAll('.custom-select-option').forEach(opt => {
-                opt.classList.remove('is-selected');
-                opt.setAttribute('aria-selected', 'false');
-            });
-            option.classList.add('is-selected');
-            option.setAttribute('aria-selected', 'true');
+            // Re-render to update checkmarks
+            setupEngines();
             
             // 关闭下拉框
             closeEngineDropdown();
@@ -58,10 +102,35 @@ export function setupEngines() {
         els.engineSelectDropdown.appendChild(option);
     });
     
+    // Add the "Add" button tile
+    const addOption = document.createElement('div');
+    addOption.className = 'custom-select-option engine-add-btn';
+    addOption.innerHTML = `
+        <div class="engine-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+        </div>
+        <div class="custom-select-option-label">添加</div>
+        <!-- Add empty spacer to keep height consistent with selected items -->
+        <div class="engine-selected-check" style="opacity: 0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+    `;
+    addOption.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Trigger modal to add search engine (Assuming a future integration or current simple alert)
+        alert('添加搜索引擎功能开发中');
+        closeEngineDropdown();
+    });
+    els.engineSelectDropdown.appendChild(addOption);
+    
     // 确保有选中的引擎
     if (!state.selectedEngine && state.engines.length) {
         state.selectedEngine = state.engines[0].value;
-        els.engineSelectLabel.textContent = state.engines[0].label;
+        updateCurrentEngineIcon(state.engines[0]);
     }
 }
 

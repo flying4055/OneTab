@@ -7,7 +7,7 @@ export const els = {
     searchResults: document.getElementById('searchResults'),
     engineSelect: document.getElementById('engineSelect'),
     engineSelectBtn: document.getElementById('engineSelectBtn'),
-    engineSelectLabel: document.getElementById('engineSelectLabel'),
+    engineSelectIcon: document.getElementById('engineSelectIcon'),
     engineSelectDropdown: document.getElementById('engineSelectDropdown'),
     searchBtn: document.getElementById('searchBtn'),
     contextMenu: document.getElementById('contextMenu'),

@@ -17,9 +17,13 @@ export function applyWallpaper(dataUrl) {
     const next = dataUrl || '';
     if (state.wallpaperDataUrl === next) return;
     state.wallpaperDataUrl = next;
-    const value = next ? `url("${next}")` : 'none';
     if (!document.body) return;
-    document.body.style.setProperty('--wallpaper-image', value);
+    
+    if (next) {
+        document.body.style.setProperty('--wallpaper-image', `url("${next}")`);
+    } else {
+        document.body.style.removeProperty('--wallpaper-image');
+    }
 }
 
 export function loadWallpaper() {
