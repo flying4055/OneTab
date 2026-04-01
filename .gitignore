@@ -1,12 +1,55 @@
-# Build output
+# ======================
+# 构建产物 (Build Output)
+# ======================
 dist/
 *.crx
 *.pem
 
-# Reports
+# ======================
+# 依赖目录 (Dependencies)
+# ======================
+node_modules/
+
+# ======================
+# 报告文档 (Reports)
+# ======================
 FUNCTION_CHECK_REPORT.md
 OPTIMIZATION_REPORT.md
 
-# Temp files
+# ======================
+# 临时文件 (Temp Files)
+# ======================
 clear_cache.js
 pnpm-workspace.yaml
+
+# ======================
+# 系统文件 (System Files)
+# ======================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ======================
+# IDE 配置 (IDE Config)
+# ======================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ======================
+# 日志文件 (Logs)
+# ======================
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ======================
+# 锁文件 (Lock Files)
+# ======================
+# 使用 pnpm，忽略 package-lock.json
+package-lock.json
+
