@@ -3,24 +3,14 @@
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "Bundler",
-    "lib": [
-      "ES2022",
-      "DOM"
-    ],
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM"],
     "allowJs": true,
     "checkJs": true,
     "noEmit": true,
     "strict": false,
     "skipLibCheck": true,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "static/js/contracts/**/*.js",
-    "static/js/services/navCommands.js",
-    "static/js/services/perfBaseline.js",
-    "static/js/services/searchIndex.js",
-    "tests/**/*.mjs"
-  ]
+  "include": ["src/**/*.js", "src/**/*.jsx"]
 }

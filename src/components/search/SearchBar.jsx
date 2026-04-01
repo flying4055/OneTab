@@ -14,6 +14,7 @@ import {
 import { 
   Search as SearchIcon
 } from '@mui/icons-material';
+import { useSettingsStore } from '../../store';
 
 // 模拟搜索引擎数据
 const ENGINES = [
@@ -25,7 +26,9 @@ const ENGINES = [
 export default function SearchBar({ sites = [], openInNewTab = false }) {
   const [inputValue, setInputValue] = useState('');
   const [debouncedValue, setDebouncedValue] = useState('');
-  const [activeEngine, setActiveEngine] = useState(ENGINES[0]);
+  const searchEngineId = useSettingsStore(state => state.searchEngine);
+  const setSearchEngine = useSettingsStore(state => state.setSearchEngine);
+  const activeEngine = ENGINES.find(e => e.id === searchEngineId) || ENGINES[0];
   const [engineMenuAnchor, setEngineMenuAnchor] = useState(null);
 
   // Debounce the input value for matching
@@ -107,7 +110,7 @@ export default function SearchBar({ sites = [], openInNewTab = false }) {
   };
 
   const handleEngineSelect = (engine) => {
-    setActiveEngine(engine);
+    setSearchEngine(engine.id);
     handleEngineClose();
   };
 
@@ -129,10 +132,12 @@ export default function SearchBar({ sites = [], openInNewTab = false }) {
         }}
         ListboxProps={{
           sx: {
-            bgcolor: 'rgba(34, 39, 54, 0.75)',
-            backdropFilter: 'blur(20px)',
+            bgcolor: 'rgba(255, 255, 255, 0.15)',
+            backdropFilter: 'blur(30px) saturate(150%)',
+            WebkitBackdropFilter: 'blur(30px) saturate(150%)',
             color: 'white',
             border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
             borderRadius: '12px',
             mt: 1,
             '& .MuiAutocomplete-option': {
@@ -184,7 +189,11 @@ export default function SearchBar({ sites = [], openInNewTab = false }) {
                   alt={activeEngine.name} 
                   sx={{ width: 20, height: 20, borderRadius: '50%', bgcolor: 'white', p: 0.2 }}
                   onError={(e) => {
-                    e.target.style.display = 'none';
+                    /** @type {any} */
+                    const target = e.target;
+                    if (target && target.style) {
+                      target.style.display = 'none';
+                    }
                   }}
                 />
               </IconButton>
@@ -226,13 +235,15 @@ export default function SearchBar({ sites = [], openInNewTab = false }) {
                 inputProps={{ 
                   ...params.inputProps,
                   'aria-label': 'search web',
-                  style: { color: 'white' }
-                }}
-                onKeyDown={(e) => {
-                  if (params.inputProps.onKeyDown) {
-                    params.inputProps.onKeyDown(e);
+                  style: { color: 'white' },
+                  onKeyDown: (e) => {
+                    if (params.inputProps.onKeyDown) {
+                      // @ts-ignore: MUI type mismatch
+                      params.inputProps.onKeyDown(e);
+                    }
+                    // Handle custom key down logic
+                    handleKeyDown(e);
                   }
-                  handleKeyDown(e);
                 }}
               />
               

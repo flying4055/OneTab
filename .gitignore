@@ -1,12 +1,12 @@
-.codex
-.qoder
-.trae
+# Build output
+dist/
+*.crx
+*.pem
 
-# vscode
-.vscode/
+# Reports
+FUNCTION_CHECK_REPORT.md
+OPTIMIZATION_REPORT.md
 
-# node modules
-node_modules/
-
-# tests
-tests/
+# Temp files
+clear_cache.js
+pnpm-workspace.yaml

@@ -13,19 +13,25 @@ export const useFeedback = () => {
 
 export function FeedbackProvider({ children }) {
   // Snackbar state
+  /** @type {[ {open: boolean, message: string, severity: "success" | "info" | "warning" | "error"}, React.Dispatch<React.SetStateAction<{open: boolean, message: string, severity: "success" | "info" | "warning" | "error"}>> ]} */
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
-    severity: 'info', // 'error' | 'warning' | 'info' | 'success'
+    severity: 'info',
   });
 
   // Loading state
   const [loading, setLoading] = useState(false);
 
+  /**
+   * @param {string} message
+   * @param {"success" | "info" | "warning" | "error"} severity
+   */
   const showMessage = useCallback((message, severity = 'info') => {
     setSnackbar({
       open: true,
       message,
+      // @ts-ignore
       severity,
     });
   }, []);
@@ -53,7 +59,8 @@ export function FeedbackProvider({ children }) {
       >
         <Alert 
           onClose={hideMessage} 
-          severity={snackbar.severity} 
+          /** @type {"success" | "info" | "warning" | "error"} */
+          severity={snackbar.severity || 'info'} 
           sx={{ width: '100%', boxShadow: 3 }}
           variant="filled"
         >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardActionArea, Avatar, Typography, Tooltip, Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function SiteCard({ site, onClick, onContextMenu, openInNewTab }) {
   const getInitials = (name) => {
@@ -9,6 +9,7 @@ export default function SiteCard({ site, onClick, onContextMenu, openInNewTab })
   const handleClick = (e) => {
     if (onClick) {
       e.preventDefault();
+      e.stopPropagation();
       onClick(site);
     }
   };
@@ -16,6 +17,8 @@ export default function SiteCard({ site, onClick, onContextMenu, openInNewTab })
   const handleContextMenu = (e) => {
     if (onContextMenu) {
       e.preventDefault();
+      e.stopPropagation();
+      // 立即触发，提高响应速度
       onContextMenu(e, site);
     }
   };
@@ -32,63 +35,94 @@ export default function SiteCard({ site, onClick, onContextMenu, openInNewTab })
     }
   };
 
+  // 决定背景色:
+  // 如果用户明确设置了非透明的 bgColor，则使用它。
+  // 否则，强制使用默认的纯白色。
+  // 这确保了透明的图标（如 126 邮箱）也能被清晰看到，不至于和壁纸融为一体。
+  const displayBgColor = site.bgColor && site.bgColor !== 'transparent' 
+    ? site.bgColor 
+    : '#ffffff';
+
+  // 决定首字母文字颜色
+  const displayTextColor = site.textColor 
+    ? site.textColor 
+    : (displayBgColor !== '#ffffff' ? 'white' : '#000000');
+
   return (
-    <Box 
-      sx={{ 
-        width: 64, 
+    <Box
+      sx={{
+        width: 64,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: 1,
-        transition: 'transform 0.2s ease',
-        '&:hover, &:focus-within': {
-          transform: 'translateY(-4px)',
-        }
+        cursor: 'pointer'
       }}
       onContextMenu={handleContextMenu}
       onKeyDown={handleKeyDown}
     >
-      <CardActionArea 
+      <Box
         component="a"
         href={site.url}
         target={openInNewTab ? "_blank" : "_self"}
         onClick={handleClick}
-        sx={{ 
+        sx={{
           width: 56,
           height: 56,
-          borderRadius: '16px', // Squircle
-          display: 'flex', 
+          borderRadius: '16px',
+          display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          bgcolor: site.bgColor && site.bgColor !== 'transparent' ? site.bgColor : '#ffffff',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-          overflow: 'hidden'
+          bgcolor: displayBgColor,
+          overflow: 'hidden',
+          textDecoration: 'none',
+          outline: 'none',
+          WebkitTapHighlightColor: 'transparent'
         }}
       >
         {site.icon ? (
-          <Box component="img" src={site.icon} alt="" sx={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <Box 
+            component="img" 
+            src={site.icon} 
+            alt={site.name} 
+            sx={{ 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover', 
+              display: 'block', 
+              border: 'none',
+              backgroundColor: 'transparent',
+            }}
+            onError={(e) => {
+              // 简单处理图片加载失败，隐藏图片，交给父元素的背景色和子元素的文字兜底
+              // 实际应用中可以替换为占位图或者文字
+              if (e.target instanceof HTMLImageElement) {
+                e.target.style.display = 'none';
+              }
+            }}
+          />
         ) : (
           <Typography 
             variant="h6" 
             fontWeight="bold"
             sx={{ 
-              color: site.textColor ? site.textColor : (site.bgColor && site.bgColor !== 'transparent' && site.bgColor !== '#ffffff' ? 'white' : '#000000')
+              color: displayTextColor
             }}
           >
             {getInitials(site.name)}
           </Typography>
         )}
-      </CardActionArea>
-      <Typography 
-        variant="caption" 
-        component="div" 
-        align="center" 
-        noWrap 
-        sx={{ 
+      </Box>
+      <Typography
+        variant="caption"
+        component="div"
+        align="center"
+        noWrap
+        sx={{
           width: '100%',
           fontSize: '11px',
           color: 'white',
-          textShadow: '0 1px 2px rgba(0,0,0,0.8)'
+          userSelect: 'none'
         }}
       >
         {site.name}

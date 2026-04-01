@@ -8,7 +8,7 @@ import SiteGrid from './components/sites/SiteGrid';
 import SiteContextMenu from './components/sites/SiteContextMenu';
 import SiteEditorDialog from './components/sites/SiteEditorDialog';
 import { useFeedback } from './components/feedback/FeedbackProvider';
-import navData from '../nav.json'; // 引入真实数据
+import { useDataStore, useSettingsStore, setupStoreSync } from './store';
 
 // 懒加载非首屏组件
 const SettingsDrawer = lazy(() => import('./components/settings/SettingsDrawer'));
@@ -17,15 +17,21 @@ const WallpaperManager = lazy(() => import('./components/wallpaper/WallpaperMana
 export default function App() {
   const mode = 'dark'; // 固定为暗黑主题
   
-  // 基于 nav.json 初始化的数据状态
-  const [categories, setCategories] = useState([]);
+  // Zustand Stores
+  const categories = useDataStore((state) => state.categories);
+  const setCategories = useDataStore((state) => state.setCategories);
+  const deleteSite = useDataStore((state) => state.deleteSite);
+
+  const wallpaperUrl = useSettingsStore((state) => state.wallpaperUrl);
+  const setWallpaperUrl = useSettingsStore((state) => state.setWallpaperUrl);
+  const openInNewTab = useSettingsStore((state) => state.openInNewTab);
+  const toggleOpenInNewTab = useSettingsStore((state) => state.toggleOpenInNewTab);
+  
   const [activeGroupId, setActiveGroupId] = useState('');
   
   const [contextMenu, setContextMenu] = useState(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [wallpaperManagerOpen, setWallpaperManagerOpen] = useState(false);
-  const [wallpaperUrl, setWallpaperUrl] = useState('/static/img/bg.jpg'); // Default background
-  const [openInNewTab, setOpenInNewTab] = useState(false); // Default to current tab
 
   // Site Editor State
   const [siteEditorOpen, setSiteEditorOpen] = useState(false);
@@ -37,71 +43,16 @@ export default function App() {
 
   const { showMessage, showLoading, hideLoading } = useFeedback();
 
-  // Load from local storage and initialize data on mount
+  // Setup cross-tab sync
   useEffect(() => {
-    // Wallpaper
-    const savedWallpaper = localStorage.getItem('wallpaper_url');
-    if (savedWallpaper !== null) {
-      setWallpaperUrl(savedWallpaper);
-    }
-    
-    // Open in new tab setting
-    const savedOpenInNewTab = localStorage.getItem('open_in_new_tab');
-    if (savedOpenInNewTab !== null) {
-      setOpenInNewTab(savedOpenInNewTab === 'true');
-    }
-
-    // Nav Data
-    const savedNavData = localStorage.getItem('nav_data_v2');
-    let initialCategories = [];
-    if (savedNavData) {
-      try {
-        initialCategories = JSON.parse(savedNavData).categories;
-      } catch (e) {
-        console.error('Failed to parse saved nav data', e);
-        initialCategories = navData.categories;
-      }
-    } else {
-      initialCategories = navData.categories;
-    }
-    
-    // 仅保留第一个分组（主页）的所有书签，扁平化为一个列表
-    const initialItems = initialCategories.length > 0 ? initialCategories[0].items.map(item => ({
-      id: item.id,
-      name: item.name,
-      url: item.url,
-      icon: item.src || item.icon || ''
-    })) : [];
-
-    setCategories([{
-      id: 'home',
-      label: '主页',
-      items: initialItems
-    }]);
+    const cleanupSync = setupStoreSync();
+    return () => {
+      cleanupSync && cleanupSync();
+    };
   }, []);
-
-  // Save data to localStorage whenever categories change
-  useEffect(() => {
-    if (categories.length > 0) {
-      localStorage.setItem('nav_data_v2', JSON.stringify({ version: 2, categories }));
-    }
-  }, [categories]);
-
-  const toggleOpenInNewTab = () => {
-    setOpenInNewTab(prev => {
-      const newValue = !prev;
-      localStorage.setItem('open_in_new_tab', String(newValue));
-      return newValue;
-    });
-  };
 
   const handleApplyWallpaper = (url) => {
     setWallpaperUrl(url || '');
-    if (url) {
-      localStorage.setItem('wallpaper_url', url);
-    } else {
-      localStorage.setItem('wallpaper_url', '');
-    }
   };
 
   const theme = useMemo(() => getTheme(mode), [mode]);
@@ -113,6 +64,8 @@ export default function App() {
 
   // Context Menu Handlers
   const handleSiteContextMenu = (event, site) => {
+    event.preventDefault();
+    event.stopPropagation();
     setContextMenu({
       mouseX: event.clientX + 2,
       mouseY: event.clientY - 6,
@@ -123,6 +76,20 @@ export default function App() {
   const handleCloseContextMenu = () => {
     setContextMenu(null);
   };
+
+  // 全局点击监听 - 关闭右键菜单
+  useEffect(() => {
+    const handleClick = () => {
+      if (contextMenu) {
+        setContextMenu(null);
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [contextMenu]);
 
   const handleOpenNewTab = (site) => {
     window.open(site.url, '_blank');
@@ -138,17 +105,15 @@ export default function App() {
     setDeleteConfirmOpen(true);
   };
 
+  const addSite = useDataStore((state) => state.addSite);
+  const updateSite = useDataStore((state) => state.updateSite);
+
   const confirmDeleteSite = () => {
     if (siteToDelete) {
       const siteName = siteToDelete.name;
-      setCategories(prev => {
-        if (prev.length === 0) return prev;
-        const homeCat = prev[0];
-        return [{
-          ...homeCat,
-          items: homeCat.items.filter(item => item.id !== siteToDelete.id)
-        }];
-      });
+      // We assume everything is in 'home' category
+      deleteSite('home', siteToDelete.id);
+      
       // 将 showMessage 移出同步渲染周期，或者使用 useEffect 监听操作完成
       setTimeout(() => {
         showMessage(`已删除 ${siteName}`, 'success');
@@ -161,22 +126,17 @@ export default function App() {
   // 站点编辑器保存处理
   const handleSaveSite = (siteData) => {
     let isUpdate = false;
-    setCategories(prev => {
-      if (prev.length === 0) return prev;
-      const homeCat = prev[0];
-      let newItems = [...homeCat.items];
-      const existingIndex = newItems.findIndex(item => item.id === siteData.id);
+    if (categories.length > 0) {
+      const homeCat = categories[0];
+      const existingIndex = homeCat.items.findIndex(item => item.id === siteData.id);
       
       if (existingIndex >= 0) {
-        // 更新已有站点
-        newItems[existingIndex] = siteData;
+        updateSite('home', siteData);
         isUpdate = true;
       } else {
-        // 添加新站点
-        newItems.push(siteData);
+        addSite('home', siteData);
       }
-      return [{ ...homeCat, items: newItems }];
-    });
+    }
     
     // 延迟触发消息通知，避免在 React 渲染阶段触发 Context Provider 的 setState
     setTimeout(() => {
@@ -191,13 +151,13 @@ export default function App() {
         onOpenSettings={() => setSettingsOpen(true)}
         wallpaperUrl={wallpaperUrl}
       >
-        <Box 
-          sx={{ 
-            width: '100%', 
-            mt: '15vh', 
-            px: 4, 
-            display: 'flex', 
-            flexDirection: 'column', 
+        <Box
+          sx={{
+            width: '100%',
+            mt: '15vh',
+            px: 4,
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             // Responsive width based on requested breakpoints
             maxWidth: {
@@ -209,14 +169,40 @@ export default function App() {
             }
           }}
         >
-          <SearchBar 
+          <SearchBar
             sites={categories.flatMap(c => c.items)} // Pass all sites for matching
             openInNewTab={openInNewTab}
           />
 
-          <Box sx={{ width: '100%' }}>
-            <SiteGrid 
-              sites={activeSites} 
+          {/* 书签滚动容器 */}
+          <Box 
+            sx={{ 
+              width: '100%',
+              // 计算高度：视口高度 - 顶部间距 - 搜索栏高度 - 底部安全距离
+              height: 'calc(100vh - 25vh)',
+              overflowY: 'auto',
+              mt: 2,
+              // 顶部内边距，防止第一个书签上移时被遮挡
+              pt: '4px',
+              // 自定义滚动条样式
+              '&::-webkit-scrollbar': {
+                width: '8px'
+              },
+              '&::-webkit-scrollbar-track': {
+                bgcolor: 'rgba(255, 255, 255, 0.05)',
+                borderRadius: '4px'
+              },
+              '&::-webkit-scrollbar-thumb': {
+                bgcolor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '4px',
+                '&:hover': {
+                  bgcolor: 'rgba(255, 255, 255, 0.3)'
+                }
+              }
+            }}
+          >
+            <SiteGrid
+              sites={activeSites}
               onSiteContextMenu={handleSiteContextMenu}
               openInNewTab={openInNewTab}
               onAddSite={() => {
@@ -228,11 +214,17 @@ export default function App() {
         </Box>
       </AppShell>
       
-      <SiteContextMenu 
+      <SiteContextMenu
         contextMenu={contextMenu}
         onClose={handleCloseContextMenu}
         onEdit={handleEditSite}
         onDelete={handleDeleteClick}
+        onOpenInCurrentTab={(site) => {
+          window.location.href = site.url;
+        }}
+        onOpenInNewTab={(site) => {
+          window.open(site.url, '_blank');
+        }}
       />
 
       <SiteEditorDialog

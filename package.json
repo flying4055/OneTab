@@ -1,28 +1,32 @@
 {
-  "name": "one-tab-new-tab",
+  "name": "one-new-tab",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "check:syntax": "node scripts/check-syntax.mjs",
-    "test": "node --test",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "verify": "npm run check:syntax && npm run test && npm run typecheck"
+    "build:analyze": "vite build --mode analyze"
   },
   "devDependencies": {
-    "@types/node": "^24.5.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
+    "@emotion/babel-plugin": "^11.13.5",
+    "@types/node": "^22.15.21",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^6.0.1",
-    "typescript": "^5.9.3",
+    "esbuild": "^0.27.0",
+    "typescript": "^5.8.3",
     "vite": "^8.0.3"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.9",
-    "@mui/material": "^7.3.9",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/material": "^6.4.7",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zustand": "^5.0.5"
   }
 }

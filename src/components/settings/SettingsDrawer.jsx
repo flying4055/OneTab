@@ -22,24 +22,38 @@ import {
   Upload as UploadIcon
 } from '@mui/icons-material';
 import { useFeedback } from '../feedback/FeedbackProvider';
+import { useDataStore, useSettingsStore } from '../../store';
 
 const SETTINGS_WIDTH = 340;
 
 export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInNewTab, toggleOpenInNewTab }) {
   const [expanded, setExpanded] = useState('panel1');
   const { showMessage } = useFeedback();
+  const categories = useDataStore(state => state.categories);
+  const setCategories = useDataStore(state => state.setCategories);
+  const wallpaperUrl = useSettingsStore(state => state.wallpaperUrl);
+  const setWallpaperUrl = useSettingsStore(state => state.setWallpaperUrl);
+  const setOpenInNewTab = useSettingsStore(state => state.setOpenInNewTab);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   const handleExport = () => {
-    // 模拟导出数据
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
-      openInNewTab,
-      version: '1.0.0',
-      exportDate: new Date().toISOString()
-    }));
+    const searchEngine = useSettingsStore.getState().searchEngine;
+    const exportData = {
+      version: '2.0.0',
+      exportDate: new Date().toISOString(),
+      settings: {
+        openInNewTab,
+        wallpaperUrl,
+        searchEngine
+      },
+      data: {
+        categories
+      }
+    };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", "onetab_backup.json");
@@ -55,9 +69,23 @@ export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInN
       const reader = new FileReader();
       reader.onload = (event) => {
         try {
-          const data = JSON.parse(event.target.result);
-          console.log('Imported data:', data);
-          showMessage('配置导入成功，部分设置需刷新生效', 'success');
+          const result = event.target.result;
+          const imported = JSON.parse(typeof result === 'string' ? result : result.toString());
+          if (imported.data && imported.data.categories) {
+            setCategories(imported.data.categories);
+          }
+          if (imported.settings) {
+            if (imported.settings.openInNewTab !== undefined) {
+              setOpenInNewTab(imported.settings.openInNewTab);
+            }
+            if (imported.settings.wallpaperUrl !== undefined) {
+              setWallpaperUrl(imported.settings.wallpaperUrl);
+            }
+            if (imported.settings.searchEngine !== undefined) {
+              useSettingsStore.getState().setSearchEngine(imported.settings.searchEngine);
+            }
+          }
+          showMessage('配置导入成功', 'success');
         } catch (error) {
           showMessage('导入失败：文件格式不正确', 'error');
         }

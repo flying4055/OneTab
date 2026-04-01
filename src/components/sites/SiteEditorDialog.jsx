@@ -9,7 +9,8 @@ import {
   Typography,
   IconButton
 } from '@mui/material';
-import { Close as CloseIcon } from '@mui/icons-material';
+import { Close as CloseIcon, CloudDownload as CloudDownloadIcon } from '@mui/icons-material';
+import { useFeedback } from '../feedback/FeedbackProvider';
 
 const PRESET_COLORS = [
   'transparent',
@@ -25,8 +26,11 @@ const PRESET_COLORS = [
 ];
 
 export default function SiteEditorDialog({ open, onClose, onSave, initialData }) {
-  const [formData, setFormData] = useState({ name: '', url: '', icon: '', bgColor: 'transparent', textColor: '' });
+  const [formData, setFormData] = useState({ id: '', name: '', url: '', icon: '', bgColor: 'transparent', textColor: '' });
   const fileInputRef = useRef(null);
+  const { showMessage } = useFeedback();
+  const [fetchedIcons, setFetchedIcons] = useState([]);
+  const [isFetchingIcons, setIsFetchingIcons] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -37,8 +41,9 @@ export default function SiteEditorDialog({ open, onClose, onSave, initialData })
           textColor: initialData.textColor || ''
         });
       } else {
-        setFormData({ name: '', url: '', icon: '', bgColor: 'transparent', textColor: '' });
+        setFormData({ id: '', name: '', url: '', icon: '', bgColor: 'transparent', textColor: '' });
       }
+      setFetchedIcons([]);
     }
   }, [open, initialData]);
 
@@ -67,7 +72,7 @@ export default function SiteEditorDialog({ open, onClose, onSave, initialData })
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        setFormData(prev => ({ ...prev, icon: event.target.result }));
+        setFormData(prev => ({ ...prev, icon: event.target.result.toString() }));
       };
       reader.readAsDataURL(file);
     }
@@ -78,6 +83,45 @@ export default function SiteEditorDialog({ open, onClose, onSave, initialData })
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+  };
+
+  const handleFetchIcons = () => {
+    if (!formData.url) {
+      showMessage('请先输入网站链接', 'warning');
+      return;
+    }
+    
+    let hostname = '';
+    try {
+      let urlStr = formData.url;
+      if (!urlStr.startsWith('http')) {
+        urlStr = 'https://' + urlStr;
+      }
+      hostname = new URL(urlStr).hostname;
+    } catch (e) {
+      showMessage('链接格式无效，无法解析域名', 'error');
+      return;
+    }
+
+    setIsFetchingIcons(true);
+    
+    // 生成多个可能的图标获取地址
+    const potentialIcons = [
+      `https://logo.clearbit.com/${hostname}`,
+      `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`,
+      `https://icons.duckduckgo.com/ip3/${hostname}.ico`,
+      `https://${hostname}/favicon.ico`,
+      `https://${hostname}/apple-touch-icon.png`
+    ];
+
+    // 去重
+    const uniqueIcons = [...new Set(potentialIcons)];
+    setFetchedIcons(uniqueIcons);
+    
+    setTimeout(() => {
+      setIsFetchingIcons(false);
+      showMessage('已获取相关图标候选，请在下方选择', 'success');
+    }, 500);
   };
 
   const handleSave = () => {
@@ -109,15 +153,21 @@ export default function SiteEditorDialog({ open, onClose, onSave, initialData })
       onClose={onClose} 
       maxWidth="xs" 
       fullWidth
+      slotProps={{
+        backdrop: {
+          invisible: true,
+        }
+      }}
       PaperProps={{
         sx: {
           borderRadius: 4,
-          bgcolor: 'rgba(34, 39, 54, 0.75)', // 半透明背景
-          backdropFilter: 'blur(20px)', // 高斯模糊
+          bgcolor: 'rgba(255, 255, 255, 0.15)',
+          backdropFilter: 'blur(30px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(30px) saturate(150%)',
           color: 'white',
           backgroundImage: 'none',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
           p: 1
         }
       }}
@@ -243,12 +293,60 @@ export default function SiteEditorDialog({ open, onClose, onSave, initialData })
                 >
                   移除自定义
                 </Button>
+                <Button 
+                  variant="outlined" 
+                  size="small"
+                  onClick={handleFetchIcons}
+                  disabled={isFetchingIcons}
+                  startIcon={isFetchingIcons ? null : <CloudDownloadIcon />}
+                  sx={{ 
+                    borderColor: 'rgba(255,255,255,0.1)', 
+                    color: 'white',
+                    bgcolor: 'rgba(255,255,255,0.05)',
+                    backdropFilter: 'blur(10px)',
+                    textTransform: 'none',
+                    fontSize: '0.75rem',
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.2)' },
+                    '&.Mui-disabled': { color: 'rgba(255,255,255,0.3)', borderColor: 'rgba(255,255,255,0.05)' }
+                  }}
+                >
+                  {isFetchingIcons ? '获取中...' : '自动获取'}
+                </Button>
               </Box>
               <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.6875rem' }}>
-                支持图片上传，保存时自动转换为 WebP。
+                支持图片上传，保存时自动转换为 WebP。自动获取需先输入链接。
               </Typography>
             </Box>
           </Box>
+          
+          {fetchedIcons.length > 0 && (
+            <Box sx={{ display: 'flex', gap: 1, mb: 1.5, flexWrap: 'wrap', p: 1, bgcolor: 'rgba(0,0,0,0.2)', borderRadius: 2, border: '1px dashed rgba(255,255,255,0.1)' }}>
+              <Typography variant="caption" sx={{ width: '100%', color: 'rgba(255,255,255,0.7)', fontSize: '0.6875rem', mb: 0.5 }}>
+                点击选择图标 (部分可能加载失败)：
+              </Typography>
+              {fetchedIcons.map((iconUrl, index) => (
+                <Box
+                  key={index}
+                  component="img"
+                  src={iconUrl}
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  onClick={() => setFormData(prev => ({ ...prev, icon: iconUrl }))}
+                  sx={{
+                    width: 54, // 放大到 54px
+                    height: 54, // 放大到 54px
+                    borderRadius: 2, // 圆角稍微增大以匹配更大的图标
+                    cursor: 'pointer',
+                    bgcolor: 'white',
+                    objectFit: 'cover',
+                    p: 0.5, // 内边距稍微增大一点
+                    border: formData.icon === iconUrl ? '2px solid #5c73e6' : '2px solid transparent', // 边框也稍微加粗一点
+                    transition: 'transform 0.1s',
+                    '&:hover': { transform: 'scale(1.1)' }
+                  }}
+                />
+              ))}
+            </Box>
+          )}
         </Box>
 
         {/* 图标背景色与文字颜色 */}

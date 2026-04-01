@@ -54,13 +54,19 @@ export default function WallpaperManager({ open, onClose, onApply }) {
       onClose={onClose} 
       maxWidth="sm" 
       fullWidth
+      slotProps={{
+        backdrop: {
+          invisible: true,
+        }
+      }}
       PaperProps={{
         sx: {
           borderRadius: 4,
-          bgcolor: 'rgba(34, 39, 54, 0.75)',
-          backdropFilter: 'blur(20px)',
+          bgcolor: 'rgba(255, 255, 255, 0.15)',
+          backdropFilter: 'blur(30px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(30px) saturate(150%)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
-          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
           color: 'white',
           backgroundImage: 'none'
         }
