@@ -1,254 +1,129 @@
 {
-  "version": 2,
+  "version": 3,
   "categories": [
     {
-      "id": "1",
+      "id": "home",
       "label": "主页",
       "items": [
         {
           "id": "Iv-vofhdzRU-MzL9oKDzg0745",
           "name": "哔哩哔哩",
           "url": "https://www.bilibili.com/",
-          "src": "https://files.codelife.cc/icons/bilibili2.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "IEvWMSmqVawJWrD_vcDw73322",
-          "name": "通义千问",
-          "url": "https://www.qianwen.com/",
-          "src": "https://img.alicdn.com/imgextra/i4/O1CN01EfJVFQ1uZPd7W4W6i_!!6000000006051-2-tps-112-112.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "KOxsK2M75AIKUxS6QdXbc4064",
-          "name": "智谱清言",
-          "url": "https://chatglm.cn/",
-          "src": "https://files.codelife.cc/icons/chatglm.cn.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "-o_tStwuqJwlZhV7HgM9M6371",
-          "name": "FlowUs",
-          "url": "https://flowus.cn/",
-          "src": "https://files.codelife.cc/icons/flowus.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "GHtWiJ-S7put3xQnxymgL6876",
-          "name": "Cloudflare",
-          "url": "https://dash.cloudflare.com/",
-          "src": "https://files.codelife.cc/website/604ad9938af9860fb41a9dde.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "29f06Mpwa11aOBNJjMPp67195",
-          "name": "今日热榜",
-          "url": "https://tophub.today/",
-          "src": "https://files.codelife.cc/icons/tophubtopday.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "ZuDS7fcX623fYPbQUf6Su6594",
-          "name": "InfoQ",
-          "url": "https://www.infoq.cn/",
-          "src": "https://files.codelife.cc/icons/infoq.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "Pd5SKLHDUyy7v0VUWycBa",
-          "name": "网易云音乐",
-          "url": "http://music.163.com/",
-          "src": "https://files.codelife.cc/website/music163.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "Ry0KpW4PwCpFNuhrjZdna",
-          "name": "高德地图",
-          "url": "http://ditu.amap.com/",
-          "src": "https://files.codelife.cc/website/595a178e703e23483da8775f.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "RVRGuBQiixye7Bv2MlMGU",
-          "name": "腾讯视频",
-          "url": "http://v.qq.com/",
-          "src": "https://files.codelife.cc/website/qqvideo.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "60b9ea7aae5a9ba4024b3744",
-          "name": "阿里云",
-          "url": "https://www.aliyun.com/",
-          "src": "https://files.codelife.cc/website/595a178e703e23483da8784d.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "60b9eac9ae5a9ba4024b392a",
-          "name": "阿里云盘",
-          "url": "https://www.aliyundrive.com/",
-          "src": "https://files.codelife.cc/website/aliyundrive.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "wyuo1P7YdygxDJFnoBM2S",
-          "name": "腾讯云",
-          "url": "https://cloud.tencent.com/",
-          "src": "https://files.codelife.cc/website/5aebfdf4fb674834c299ff9a.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "0KHfr8rryd2W1Zk0Xa0ZD3434",
-          "name": "腾讯文档",
-          "url": "http://docs.qq.com/",
-          "src": "https://files.codelife.cc/icons/docs-qq.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "QJU9bqEdi-qcEVtUfTUuf9389",
-          "name": "抖音",
-          "url": "https://www.douyin.com/",
-          "src": "https://files.codelife.cc/website/douyin.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "dFL9pJBwCJcObxfiG3GPS6684",
-          "name": "秘塔写作猫",
-          "url": "https://xiezuocat.com/?s=itab",
-          "src": "https://files.codelife.cc/icons/xiezuocat.com.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "dvTLrFs01VolY4cwGEWfw8781",
-          "name": "网易126邮箱",
-          "url": "https://mail.126.com/",
-          "src": "https://files.codelife.cc/icons/126.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "8bEEWxMTu3B-Xt-fj3pIp1967",
-          "name": "网易邮箱",
-          "url": "https://email.163.com/",
-          "src": "https://files.codelife.cc/icons/eb58486c2f648735.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "5JAcSTd4a5SLd7gpJDDZz4753",
-          "name": "澎湃新闻",
-          "url": "https://www.thepaper.cn/",
-          "src": "https://files.codelife.cc/icons/www.thepaper.cn.svg",
-          "bg-color": "#f0f9ff"
+          "icon": "https://files.codelife.cc/icons/bilibili2.svg",
+          "bgColor": "#ff0000",
+          "textColor": ""
         },
         {
           "id": "Eaxo7wErkOQGkq26JC7gS5722",
           "name": "Google",
           "url": "https://www.google.com/",
-          "src": "https://files.codelife.cc/icons/google.svg",
-          "bg-color": "#f0f9ff"
+          "icon": "https://files.codelife.cc/icons/google.svg",
+          "bgColor": "#4285f4",
+          "textColor": ""
+        },
+        {
+          "id": "29f06Mpwa11aOBNJjMPp67195",
+          "name": "今日热榜",
+          "url": "https://tophub.today/",
+          "icon": "https://files.codelife.cc/icons/tophubtopday.svg",
+          "bgColor": "#0847bd",
+          "textColor": ""
+        },
+        {
+          "id": "site_1779108893667",
+          "name": "DeepSeek",
+          "url": "https://deepseek.com",
+          "icon": "https://www.google.com/s2/favicons?domain=deepseek.com&sz=128",
+          "bgColor": "#ffffff",
+          "textColor": ""
+        },
+        {
+          "id": "GHtWiJ-S7put3xQnxymgL6876",
+          "name": "Cloudflare",
+          "url": "https://dash.cloudflare.com/",
+          "icon": "https://files.codelife.cc/website/604ad9938af9860fb41a9dde.png",
+          "bgColor": "#f0f9ff",
+          "textColor": ""
+        },
+        {
+          "id": "site_1779094793394",
+          "name": "GitHub",
+          "url": "https://github.com/",
+          "icon": "https://github.com/apple-touch-icon.png",
+          "bgColor": "transparent",
+          "textColor": ""
+        },
+        {
+          "id": "site_1779078469463",
+          "name": "skills.sh",
+          "url": "https://www.skills.sh/",
+          "icon": "https://www.skills.sh/favicon.ico",
+          "bgColor": "#000000",
+          "textColor": ""
+        },
+        {
+          "id": "60b9ea7aae5a9ba4024b3744",
+          "name": "阿里云",
+          "url": "https://www.aliyun.com/",
+          "icon": "https://files.codelife.cc/website/595a178e703e23483da8784d.png",
+          "bgColor": "#f0f9ff",
+          "textColor": ""
+        },
+        {
+          "id": "60b9eac9ae5a9ba4024b392a",
+          "name": "阿里云盘",
+          "url": "https://www.aliyundrive.com/",
+          "icon": "https://icons.duckduckgo.com/ip3/www.aliyundrive.com.ico",
+          "bgColor": "transparent",
+          "textColor": ""
+        },
+        {
+          "id": "wyuo1P7YdygxDJFnoBM2S",
+          "name": "腾讯云",
+          "url": "https://cloud.tencent.com/",
+          "icon": "https://files.codelife.cc/website/5aebfdf4fb674834c299ff9a.png",
+          "bgColor": "#f0f9ff",
+          "textColor": ""
+        },
+        {
+          "id": "dvTLrFs01VolY4cwGEWfw8781",
+          "name": "网易126",
+          "url": "https://mail.126.com/",
+          "icon": "https://files.codelife.cc/icons/126.svg",
+          "bgColor": "transparent",
+          "textColor": ""
         },
         {
           "id": "oKuVRN5P40f811DT2KelO6189",
           "name": "QQ邮箱",
           "url": "https://mail.qq.com/",
-          "src": "https://files.codelife.cc/icons/qq-mail.svg",
-          "bg-color": "#f0f9ff"
+          "icon": "https://files.codelife.cc/icons/qq-mail.svg",
+          "bgColor": "#f0f9ff",
+          "textColor": ""
         },
         {
-          "id": "M1aBQSRTCGysmxZdIm9Wy1366",
-          "name": "蓝湖",
-          "url": "https://lanhuapp.com/",
-          "src": "https://files.codelife.cc/icons/lanhuapp.svg",
-          "bg-color": "#f0f9ff"
+          "id": "site_1779084213775",
+          "name": "Mui",
+          "url": "https://mui.com/",
+          "icon": "https://www.google.com/s2/favicons?domain=mui.com&sz=128",
+          "bgColor": "transparent",
+          "textColor": ""
         },
         {
           "id": "dnUCMZrazDRXxBbjdVZuN0339",
           "name": "WordPress",
           "url": "https://cn.wordpress.org/",
-          "src": "https://s.w.org/images/wmark.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "yRCQdc2K4ufBPQLJcn75h1935",
-          "name": "WP智库",
-          "url": "https://www.wpzhiku.com/",
-          "src": "https://c.wpzhiku.com/uploads/2019/09/icon.ico",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "caDvjmxPDFOPuZUKGl4Fv4802",
-          "name": "COLG社区",
-          "url": "https://bbs.colg.cn/",
-          "src": "https://files.codelife.cc/icons/60b9ef17ae5a9ba4024b471e.png",
-          "bg-color": "#f0f9ff"
+          "icon": "https://s.w.org/images/wmark.png",
+          "bgColor": "#f0f9ff",
+          "textColor": ""
         },
         {
           "id": "ue8kW1wZ7aSGAZ7Ol31ab2704",
-          "name": "绿色软件下载",
+          "name": "绿色软件",
           "url": "http://www.itmop.com/",
-          "src": "https://files.codelife.cc/icons/www.itmop.com.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "8owKcfwVD_PpSYwAkK0Ho6485",
-          "name": "先上DJ",
-          "url": "http://www.dj1234.com/",
-          "src": "",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "8cJ2D8x7TMycSiQkM3J7P0684",
-          "name": "AI工具集",
-          "url": "https://ai-bot.cn/",
-          "src": "https://files.codelife.cc/icons/ai-bot.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "2j2KDwHCjfBw-YccbJD1K4068",
-          "name": "扣子",
-          "url": "https://www.coze.cn/",
-          "src": "https://files.codelife.cc/icons/coze-cn.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "yazBxTig0ekWWWbBv5csX9923",
-          "name": "Obsidian",
-          "url": "https://obsidian.md/",
-          "src": "https://obsidian.md/favicon.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "UbUL9PJU8pLLIc-fXOHGi8356",
-          "name": "电影频道",
-          "url": "https://v.vcinema.cn/",
-          "src": "https://s.image.vcinema.com.cn/common/img/pumpkin.ico",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "0q2ClG9j37665ZqGo0EUF3718",
-          "name": "奈飞工厂",
-          "url": "https://yanetflix.com/",
-          "src": "https://yanetflix.com/upload/site/20241029-1/a3066e37a45ef286668060443b4de885.png",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "JV-Z2CNqkR2X92A2w5hDf6457",
-          "name": "茶杯狐",
-          "url": "https://www.cl-mic.com/",
-          "src": "",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "gLW_QF1Aoh9fhwDFv6cJf4743",
-          "name": "Figma",
-          "url": "https://www.figma.com/",
-          "src": "https://files.codelife.cc/icons/figma.svg",
-          "bg-color": "#f0f9ff"
-        },
-        {
-          "id": "O_TIu-s7QHmkl--uiOs2Q8701",
-          "name": "咕咕番",
-          "url": "https://www.gugu3.com/",
-          "src": "",
-          "bg-color": "#f0f9ff"
+          "icon": "https://files.codelife.cc/icons/www.itmop.com.svg",
+          "bgColor": "transparent",
+          "textColor": ""
         }
       ]
     }

@@ -84,13 +84,15 @@ export const useDataStore = create(
         }
 
         // 无持久化数据时（首次安装 / 清除缓存），使用 nav.json 种子数据
+        // 兼容旧格式 (src / bg-color) 和新格式 (icon / bgColor / textColor)
         const initialCategories = navData.categories;
-        const initialItems = initialCategories.length > 0 ? initialCategories[0].items.map(item => ({
+        const initialItems = initialCategories.length > 0 ? initialCategories[0].items.map((/** @type {any} */ item) => ({
           id: item.id,
           name: item.name,
           url: item.url,
-          icon: item.src || '',
-          'bg-color': item['bg-color'] || '#f0f9ff'
+          icon: item.icon || item.src || '',
+          bgColor: item.bgColor || item['bg-color'] || '#f0f9ff',
+          textColor: item.textColor || ''
         })) : [];
 
         return {

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "description": "默认设置兜底数据，首次安装或清除缓存时使用",
+  "settings": {
+    "openInNewTab": false,
+    "wallpaperUrl": "/bg.webp",
+    "searchEngine": "google",
+    "iconSize": 60,
+    "gridGap": 20,
+    "contentMaxWidth": 1680,
+    "wallpaperOpacity": 1
+  }
+}
