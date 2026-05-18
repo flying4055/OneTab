@@ -1,0 +1,45 @@
+{
+  "sources": {
+    "nature": {
+      "name": "自然风光",
+      "wallpapers": [
+        { "id": "n1", "name": "雪山晨曦", "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=60" },
+        { "id": "n2", "name": "秋日森林", "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&q=60" },
+        { "id": "n3", "name": "极光之夜", "url": "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=400&q=60" },
+        { "id": "n4", "name": "樱花季", "url": "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1522383225653-ed111181a951?w=400&q=60" },
+        { "id": "n5", "name": "星空银河", "url": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400&q=60" },
+        { "id": "n6", "name": "热带海滩", "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=60" },
+        { "id": "n7", "name": "薰衣草田", "url": "https://images.unsplash.com/photo-1490750967868-88aa4d178230?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1490750967868-88aa4d178230?w=400&q=60" },
+        { "id": "n8", "name": "峡谷日落", "url": "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=400&q=60" },
+        { "id": "n9", "name": "山间湖泊", "url": "https://images.unsplash.com/photo-1439853949127-fa647821eba0?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1439853949127-fa647821eba0?w=400&q=60" },
+        { "id": "n10", "name": "沙漠黄昏", "url": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&q=60" }
+      ]
+    },
+    "city": {
+      "name": "城市建筑",
+      "wallpapers": [
+        { "id": "c1", "name": "东京夜景", "url": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&q=60" },
+        { "id": "c2", "name": "纽约天际线", "url": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&q=60" },
+        { "id": "c3", "name": "上海外滩", "url": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1538428494232-9c0d8a3ab403?w=400&q=60" },
+        { "id": "c4", "name": "伦敦桥", "url": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&q=60" },
+        { "id": "c5", "name": "迪拜夜景", "url": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&q=60" },
+        { "id": "c6", "name": "巴黎铁塔", "url": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400&q=60" },
+        { "id": "c7", "name": "香港夜景", "url": "https://images.unsplash.com/photo-1535136104256-8a8fe3be82d8?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1535136104256-8a8fe3be82d8?w=400&q=60" },
+        { "id": "c8", "name": "芝加哥", "url": "https://images.unsplash.com/photo-1494522855154-9297ac14b55f?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1494522855154-9297ac14b55f?w=400&q=60" }
+      ]
+    },
+    "minimal": {
+      "name": "极简抽象",
+      "wallpapers": [
+        { "id": "m1", "name": "渐变蓝", "url": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=400&q=60" },
+        { "id": "m2", "name": "几何山峰", "url": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&q=60" },
+        { "id": "m3", "name": "纯色纹理", "url": "https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?w=400&q=60" },
+        { "id": "m4", "name": "圆点光影", "url": "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=400&q=60" },
+        { "id": "m5", "name": "暗色波浪", "url": "https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=400&q=60" },
+        { "id": "m6", "name": "彩色渐变", "url": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=400&q=60" },
+        { "id": "m7", "name": "墨绿极简", "url": "https://images.unsplash.com/photo-1557682260-96773eb01377?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1557682260-96773eb01377?w=400&q=60" },
+        { "id": "m8", "name": "紫雾", "url": "https://images.unsplash.com/photo-1558470598-a5dda9640f68?w=1920&q=80", "thumb": "https://images.unsplash.com/photo-1558470598-a5dda9640f68?w=400&q=60" }
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { Settings as SettingsIcon } from '@mui/icons-material';
 
 export default function AppShell({ children, onOpenSettings, wallpaperUrl }) {
@@ -22,8 +22,7 @@ export default function AppShell({ children, onOpenSettings, wallpaperUrl }) {
         }}
       >
         {/* Main Work Area */}
-        <Container 
-          maxWidth="xl" 
+        <Box
           sx={{ 
             flexGrow: 1, 
             display: 'flex', 
@@ -37,7 +36,7 @@ export default function AppShell({ children, onOpenSettings, wallpaperUrl }) {
           }}
         >
           {children}
-        </Container>
+        </Box>
 
         {/* Bottom Right Settings Icon */}
         <IconButton 

@@ -1,14 +1,6 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { createCacheStorage } from './CacheManager';
-import { notifyStoreUpdate } from './sync';
+import { persist } from 'zustand/middleware';
 import navData from '../../nav.json';
-
-// 专门为数据层设计的防抖存储，减少高频存取带来的 IO 开销
-const dataStorage = createCacheStorage({ 
-  delay: 1000,
-  onSet: (name, value) => notifyStoreUpdate(name, value) // 当内存值更新时，立即广播通知其他标签页
-});
 
 export const useDataStore = create(
   persist(
@@ -57,10 +49,23 @@ export const useDataStore = create(
         });
         return { categories: newCategories };
       }),
+
+      // 拖拽排序：重新排列指定分类下的条目
+      reorderItems: (categoryId, fromIndex, toIndex) => set((state) => {
+        const newCategories = state.categories.map(cat => {
+          if (cat.id === categoryId) {
+            const items = [...cat.items];
+            const [moved] = items.splice(fromIndex, 1);
+            items.splice(toIndex, 0, moved);
+            return { ...cat, items };
+          }
+          return cat;
+        });
+        return { categories: newCategories };
+      }),
     }),
     {
-      name: 'nav_data_v4', // 升级版本号，强制清除旧缓存并使用新数据
-      storage: createJSONStorage(() => dataStorage),
+      name: 'nav_data_v4',
       onRehydrateStorage: () => (state) => {
         state.setHydrated(true);
       },
@@ -70,7 +75,15 @@ export const useDataStore = create(
        * @param {any} currentState
        */
       merge: (persistedState, currentState) => {
-        // 直接使用 nav.json 的初始数据
+        // 如果有持久化数据且包含有效分类，则使用持久化数据
+        if (persistedState && persistedState.categories && persistedState.categories.length > 0) {
+          return {
+            ...currentState,
+            categories: persistedState.categories,
+          };
+        }
+
+        // 无持久化数据时（首次安装 / 清除缓存），使用 nav.json 种子数据
         const initialCategories = navData.categories;
         const initialItems = initialCategories.length > 0 ? initialCategories[0].items.map(item => ({
           id: item.id,

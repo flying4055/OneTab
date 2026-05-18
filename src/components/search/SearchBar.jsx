@@ -229,6 +229,7 @@ export default function SearchBar({ sites = [], openInNewTab = false }) {
               <InputBase
                 {...inputPropsRest}
                 {...rest}
+                autoFocus
                 inputRef={params.InputProps.ref}
                 sx={{ ml: 1, flex: 1, fontSize: '1rem', color: 'white' }}
                 placeholder="输入搜索内容"

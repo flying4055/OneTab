@@ -10,7 +10,8 @@ import {
   AccordionDetails,
   Switch,
   FormControlLabel,
-  Button
+  Button,
+  Slider
 } from '@mui/material';
 import { 
   Close as CloseIcon,
@@ -19,7 +20,8 @@ import {
   Settings as SettingsIcon,
   ColorLens as ColorLensIcon,
   Download as DownloadIcon,
-  Upload as UploadIcon
+  Upload as UploadIcon,
+  Widgets as WidgetsIcon
 } from '@mui/icons-material';
 import { useFeedback } from '../feedback/FeedbackProvider';
 import { useDataStore, useSettingsStore } from '../../store';
@@ -34,6 +36,12 @@ export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInN
   const wallpaperUrl = useSettingsStore(state => state.wallpaperUrl);
   const setWallpaperUrl = useSettingsStore(state => state.setWallpaperUrl);
   const setOpenInNewTab = useSettingsStore(state => state.setOpenInNewTab);
+  const iconSize = useSettingsStore(state => state.iconSize);
+  const setIconSize = useSettingsStore(state => state.setIconSize);
+  const gridGap = useSettingsStore(state => state.gridGap);
+  const setGridGap = useSettingsStore(state => state.setGridGap);
+  const contentMaxWidth = useSettingsStore(state => state.contentMaxWidth);
+  const setContentMaxWidth = useSettingsStore(state => state.setContentMaxWidth);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -47,7 +55,10 @@ export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInN
       settings: {
         openInNewTab,
         wallpaperUrl,
-        searchEngine
+        searchEngine,
+        iconSize,
+        gridGap,
+        contentMaxWidth
       },
       data: {
         categories
@@ -83,6 +94,15 @@ export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInN
             }
             if (imported.settings.searchEngine !== undefined) {
               useSettingsStore.getState().setSearchEngine(imported.settings.searchEngine);
+            }
+            if (imported.settings.iconSize !== undefined) {
+              setIconSize(imported.settings.iconSize);
+            }
+            if (imported.settings.gridGap !== undefined) {
+              setGridGap(imported.settings.gridGap);
+            }
+            if (imported.settings.contentMaxWidth !== undefined) {
+              setContentMaxWidth(imported.settings.contentMaxWidth);
             }
           }
           showMessage('配置导入成功', 'success');
@@ -137,11 +157,54 @@ export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInN
               <Typography fontWeight={500} sx={{ fontSize: '0.875rem' }}>外观设置</Typography>
             </Box>
           </AccordionSummary>
-          <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', gap: 3, px: 2 }}>
             <FormControlLabel
               control={<Switch checked={openInNewTab} onChange={toggleOpenInNewTab} size="small" />}
               label={<Typography sx={{ fontSize: '0.875rem' }}>在新标签页中打开书签</Typography>}
             />
+
+            {/* 内容区域最大宽度 */}
+            <Box sx={{ overflow: 'hidden' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
+                <Typography sx={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.7)' }}>内容区域最大宽度</Typography>
+                <Typography sx={{ fontSize: '0.8125rem', fontWeight: 500 }}>
+                  {contentMaxWidth === 0 ? '自动' : `${contentMaxWidth}px`}
+                </Typography>
+              </Box>
+              <Slider
+                value={contentMaxWidth}
+                onChange={(_, val) => setContentMaxWidth(val)}
+                min={0}
+                max={2560}
+                step={null}
+                size="small"
+                marks={[
+                  { value: 0, label: '自动' },
+                  { value: 400 },
+                  { value: 640 },
+                  { value: 768 },
+                  { value: 1024 },
+                  { value: 1280 },
+                  { value: 1440 },
+                  { value: 1680 },
+                  { value: 1920 },
+                  { value: 2560 },
+                ]}
+                sx={{
+                  color: '#5c73e6',
+                  '& .MuiSlider-thumb': { width: 14, height: 14 },
+                  '& .MuiSlider-rail': { bgcolor: 'rgba(255,255,255,0.1)' },
+                  '& .MuiSlider-markLabel': { 
+                    fontSize: '0.625rem', 
+                    color: 'rgba(255,255,255,0.4)',
+                    mt: 1,
+                  },
+                }}
+              />
+              <Typography sx={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.4)', mt: 2 }}>
+                选择 0（自动）由系统自适应；选择具体值则锁定书签区域最大宽度
+              </Typography>
+            </Box>
           </AccordionDetails>
         </Accordion>
         <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
@@ -160,7 +223,7 @@ export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInN
               <Typography fontWeight={500} sx={{ fontSize: '0.875rem' }}>壁纸与背景</Typography>
             </Box>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ px: 2 }}>
             <Button 
               variant="outlined" 
               fullWidth 
@@ -195,11 +258,71 @@ export default function SettingsDrawer({ open, onClose, onOpenWallpaper, openInN
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'rgba(255,255,255,0.7)' }} />}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <WidgetsIcon sx={{ color: 'rgba(255,255,255,0.7)' }} fontSize="small" />
+              <Typography fontWeight={500} sx={{ fontSize: '0.875rem' }}>图标</Typography>
+            </Box>
+          </AccordionSummary>
+          <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', gap: 3, px: 2 }}>
+            {/* 图标尺寸 */}
+            <Box sx={{ overflow: 'hidden' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
+                <Typography sx={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.7)' }}>图标尺寸</Typography>
+                <Typography sx={{ fontSize: '0.8125rem', fontWeight: 500 }}>{iconSize}px</Typography>
+              </Box>
+              <Slider
+                value={iconSize}
+                onChange={(_, val) => setIconSize(val)}
+                min={48}
+                max={96}
+                step={4}
+                size="small"
+                sx={{
+                  color: '#5c73e6',
+                  '& .MuiSlider-thumb': { width: 14, height: 14 },
+                  '& .MuiSlider-rail': { bgcolor: 'rgba(255,255,255,0.1)' }
+                }}
+              />
+            </Box>
+
+            {/* 卡片间距 */}
+            <Box sx={{ overflow: 'hidden' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
+                <Typography sx={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.7)' }}>卡片间距</Typography>
+                <Typography sx={{ fontSize: '0.8125rem', fontWeight: 500 }}>{gridGap}px</Typography>
+              </Box>
+              <Slider
+                value={gridGap}
+                onChange={(_, val) => setGridGap(val)}
+                min={8}
+                max={40}
+                step={2}
+                size="small"
+                sx={{
+                  color: '#5c73e6',
+                  '& .MuiSlider-thumb': { width: 14, height: 14 },
+                  '& .MuiSlider-rail': { bgcolor: 'rgba(255,255,255,0.1)' }
+                }}
+              />
+            </Box>
+          </AccordionDetails>
+        </Accordion>
+        <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
+
+        <Accordion 
+          expanded={expanded === 'panel4'} 
+          onChange={handleChange('panel4')} 
+          disableGutters 
+          elevation={0} 
+          square
+          sx={{ bgcolor: 'transparent', color: 'white', '&:before': { display: 'none' } }}
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'rgba(255,255,255,0.7)' }} />}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <SettingsIcon sx={{ color: 'rgba(255,255,255,0.7)' }} fontSize="small" />
               <Typography fontWeight={500} sx={{ fontSize: '0.875rem' }}>高级设置与数据</Typography>
             </Box>
           </AccordionSummary>
-          <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', gap: 2, px: 2 }}>
             <Button 
               variant="outlined" 
               fullWidth 
