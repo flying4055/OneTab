@@ -113,7 +113,7 @@ export default function App() {
           openInNewTab={openInNewTab} toggleOpenInNewTab={toggleOpenInNewTab}
           onOpenWallpaper={() => setWallpaperPickerOpen(true)} />
         <WallpaperPicker open={wallpaperPickerOpen} onClose={() => setWallpaperPickerOpen(false)}
-          onApply={(url) => setWallpaperUrl(url || '/bg.webp')} />
+          onApply={(url) => setWallpaperUrl(url || '/bg1.webp')} />
       </Suspense>
     </ThemeProvider>
   );

@@ -4,11 +4,11 @@ import { persist } from 'zustand/middleware';
 export const useSettingsStore = create(
   persist(
     (set, get) => ({
-      wallpaperUrl: '/bg.webp',
+      wallpaperUrl: '/bg1.webp',
       openInNewTab: false,
       searchEngine: 'google',
       
-      setWallpaperUrl: (url) => set({ wallpaperUrl: url || '/bg.webp' }),
+      setWallpaperUrl: (url) => set({ wallpaperUrl: url || '/bg1.webp' }),
       setOpenInNewTab: (value) => set({ openInNewTab: value }),
       toggleOpenInNewTab: () => set((state) => ({ openInNewTab: !state.openInNewTab })),
       setSearchEngine: (engine) => set({ searchEngine: engine }),
@@ -25,6 +25,14 @@ export const useSettingsStore = create(
 
       wallpaperOpacity: 1,
       setWallpaperOpacity: (opacity) => set({ wallpaperOpacity: opacity }),
+
+      customWallpapers: /** @type {{ id: string; name: string; dataUrl: string; createdAt: number }[]} */ ([]),
+      addCustomWallpaper: (wp) => set((s) => ({
+        customWallpapers: [...s.customWallpapers.slice(-19), wp],
+      })),
+      removeCustomWallpaper: (id) => set((s) => ({
+        customWallpapers: s.customWallpapers.filter((w) => w.id !== id),
+      })),
     }),
     {
       name: 'settings_data_v2',
